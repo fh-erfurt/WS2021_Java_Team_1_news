@@ -2,6 +2,7 @@
 
 Teammitglieder:
 Maximilian Röhr
-Elias Schrader
+(Elias Schrader)
+(Max-Niklas Bottner)
 Christof Seelisch
 Dennis Rinck
