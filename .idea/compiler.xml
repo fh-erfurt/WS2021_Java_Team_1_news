@@ -6,7 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ws2021-22-java-news" />
+        <module name="persons-client" />
+        <module name="appointments-client" />
+        <module name="news-service" />
+        <module name="faculties-client" />
+        <module name="news-client" />
       </profile>
     </annotationProcessing>
   </component>
