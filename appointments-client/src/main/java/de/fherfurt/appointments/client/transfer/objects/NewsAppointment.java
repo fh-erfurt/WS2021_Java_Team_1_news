@@ -3,17 +3,16 @@ package de.fherfurt.appointments.client.transfer.objects;
 import java.util.Date;
 
 /**
- * Represents the Appointments informations relevant for the News Module.
+ * Represents the Appointment information relevant for the News Module.
  * It is used to access Appointment Metadata in to show it in news articles with an appointment.
  */
-
-public class DTOAppointment {
+public class NewsAppointment {
     private int id;
     private String title;
     private Date date;
     private String place;
 
-    public DTOAppointment(int id, String title, Date date, String place){
+    public NewsAppointment(int id, String title, Date date, String place){
         this.id = id;
         this.title = title;
         this.date = date;

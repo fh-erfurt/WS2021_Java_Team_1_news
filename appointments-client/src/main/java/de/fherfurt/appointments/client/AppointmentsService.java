@@ -1,15 +1,17 @@
 package de.fherfurt.appointments.client;
 
-import de.fherfurt.appointments.client.transfer.objects.DTOAppointment;
+import de.fherfurt.appointments.client.transfer.objects.NewsAppointment;
 
 import java.util.Optional;
 
 public interface AppointmentsService {
 
-    int getAppointmentIdByTitle(String title);
+    Optional<NewsAppointment> getAppointmentById(int id);
 
-    DTOAppointment getAppointmentById(int id);
+    /**
+     * Eher so?
+     *     Optional<NewsAppointment> findBy(int id);
+     */
 
-    //Eher so?
-    Optional<DTOAppointment> findBy(int id);
+    Optional<NewsAppointment> getAppointmentIdByTitle(String title);
 }
