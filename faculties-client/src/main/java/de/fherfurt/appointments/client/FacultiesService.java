@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface FacultiesService {
 
-    Optional<NewsFaculty> getFacultyIdByName(String name);
+    Optional<NewsFaculty> getFacultyNameById(int id);
 
-    Optional<String> getFacultyNameById(int id);
+    Optional<NewsFaculty> getFacultyIdByName(String name);
 }
