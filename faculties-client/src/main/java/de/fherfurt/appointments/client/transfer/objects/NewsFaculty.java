@@ -3,8 +3,11 @@ package de.fherfurt.appointments.client.transfer.objects;
 /**
  * Represents the Faculty information relevant for the News Module.
  * It is used to access Faculty Metadata to filter news articles with it.
+ *
+ * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 public class NewsFaculty {
+
     private int id;
     private String name;
 
