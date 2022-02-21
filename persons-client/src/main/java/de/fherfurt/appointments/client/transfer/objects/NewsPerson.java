@@ -3,8 +3,11 @@ package de.fherfurt.appointments.client.transfer.objects;
 /**
  * Represents the Person information relevant for the News Module.
  * It is used to access Person Metadata to filter news articles with it.
+ *
+ * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 public class NewsPerson {
+
     private int id;
     private String name;
     private String mail;
