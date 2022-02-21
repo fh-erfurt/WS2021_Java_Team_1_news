@@ -13,7 +13,7 @@ import java.util.Set;
 
 /**
  * This class contains the Development Implementation of our ArticleRepository
- * It is used for communicating with a Development Implementation of our Database Interface{@link DevDatabase}
+ * It is used for communicating with the Development Implementation of our Database Interface{@link DevDatabase}
  * It also is a Singleton, because we only want to have one database to work with
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
