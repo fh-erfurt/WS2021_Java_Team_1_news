@@ -5,6 +5,8 @@ import java.util.Date;
 /**
  * Represents the Appointment information relevant for the News Module.
  * It is used to access Appointment Metadata in to show it in news articles with an appointment.
+ *
+ * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 public class NewsAppointment {
     private int id;

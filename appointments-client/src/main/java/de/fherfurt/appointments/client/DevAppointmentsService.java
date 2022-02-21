@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
+ */
 public class DevAppointmentsService implements AppointmentsService{
 
     private final List<NewsAppointment> persons = Arrays.asList(
