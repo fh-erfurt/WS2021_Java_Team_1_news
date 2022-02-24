@@ -22,7 +22,7 @@ import java.util.Set;
 public class DevArticleRepository implements ArticleRepository{
 
     private static DevArticleRepository instance;
-    private final Database<Article> database = new DevDatabase();
+    private final Database<ArticleDetails> database = new DevDatabase();
 
     public static DevArticleRepository getInstance() {
         if (Objects.isNull(instance)) {
@@ -32,12 +32,12 @@ public class DevArticleRepository implements ArticleRepository{
     }
 
     @Override
-    public Optional<Article> findBy(int id){
+    public Optional<ArticleDetails> findBy(int id){
         return database.findBy(id);
     }
 
     @Override
-    public void save(Article article){
+    public void save(ArticleDetails article){
         database.save(article);
     }
     @Override
@@ -45,8 +45,8 @@ public class DevArticleRepository implements ArticleRepository{
         database.delete(id);
     }
     @Override
-    public Optional<Set<ArticlePreview>> getArticlePreviews(PreviewRequest request){
-        Set<ArticlePreview> articlePreviews = new HashSet<>();
+    public Optional<Set<BaseArticle>> getArticlePreviews(PreviewRequest request){
+        Set<BaseArticle> articlePreviews = new HashSet<>();
         return Optional.ofNullable(articlePreviews);
     }
 }

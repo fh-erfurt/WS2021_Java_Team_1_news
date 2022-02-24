@@ -1,16 +1,16 @@
 package de.fherfurt.news.core.persistance;
 
-import de.fherfurt.news.articles.entity.Article;
+import de.fherfurt.news.articles.entity.ArticleDetails;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 
 import java.util.Map;
 import java.util.Optional;
 
-public class DevDatabase implements Database<Article>{
+public class DevDatabase implements Database<ArticleDetails>{
 
-    Map<Integer, Article> map;
+    Map<Integer, ArticleDetails> map;
     @Override
-    public void save(Article article){
+    public void save(ArticleDetails article){
         map.put(article.getId(),article);
     }
     @Override
@@ -22,7 +22,7 @@ public class DevDatabase implements Database<Article>{
     }
 
     @Override
-    public Optional<Article> findBy(int id) {
+    public Optional<ArticleDetails> findBy(int id) {
         return Optional.ofNullable(map.get(id));
     }
 

@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
-public interface ArticleRepository extends Repository<Article> {
+public interface ArticleRepository extends Repository<ArticleDetails> {
 
 
     /**
@@ -21,5 +21,5 @@ public interface ArticleRepository extends Repository<Article> {
      * @param request Request handles the information's for fetching Article Previews (SortSettings,keyword,facultyId)
      * @return returns a set of ArticlePreviews if there are some, returns empty{@link Optional} if no ArticlePreview is available
      */
-    Optional<Set<ArticlePreview>> getArticlePreviews(PreviewRequest request);
+    Optional<Set<BaseArticle>> getArticlePreviews(PreviewRequest request);
 }
