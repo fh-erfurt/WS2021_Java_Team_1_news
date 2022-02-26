@@ -2,9 +2,13 @@ package de.fherfurt.news.core.persistance;
 
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 
+import java.lang.reflect.Type;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
+ * TODO add comments
  * basic API definition for the database
  *
  * @param <TYPE> type of Entry{@link Entry}
@@ -34,4 +38,12 @@ public interface Database<TYPE extends Entry>{
      * @return The entry or empty
      */
     Optional<TYPE> findBy(int id);
+
+    Map<Integer, TYPE> getMap();
+
+    Set<TYPE> sort(SortSettings sortSettings);
+
+    Set<TYPE> search(String searchKeyword);
+
+    Set<TYPE> filter(String facultyName);
 }

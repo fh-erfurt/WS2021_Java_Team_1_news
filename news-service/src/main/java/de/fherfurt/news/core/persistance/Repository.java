@@ -2,8 +2,10 @@ package de.fherfurt.news.core.persistance;
 
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 import java.util.Optional;
+import java.util.Set;
 
 /**
+ * TODO add comments
  * Basic API definition of the Repository which is used to communicate to the underlying database
  *
  * @param <TYPE> Generic type of entry
@@ -34,4 +36,7 @@ public interface Repository<TYPE extends Entry> {
      * @throws EntryNotFoundException Exception is thrown if the entry isn´t available
      */
     void delete(int id) throws EntryNotFoundException;
+
+    Set<TYPE> fetchAll();
+
 }

@@ -2,11 +2,13 @@ package de.fherfurt.news.articles.entity;
 
 import de.fherfurt.news.core.persistance.PreviewRequest;
 import de.fherfurt.news.core.persistance.Repository;
+import de.fherfurt.news.core.persistance.SortSettings;
 
 import java.util.Optional;
 import java.util.Set;
 
 /**
+ * TODO add comments
  * specified API definition of the Repository which is used to communicate to the underlying database
  * it only used for Articles
  *
@@ -22,4 +24,8 @@ public interface ArticleRepository extends Repository<ArticleDetails> {
      * @return returns a set of ArticlePreviews if there are some, returns empty{@link Optional} if no ArticlePreview is available
      */
     Optional<Set<BaseArticle>> getArticlePreviews(PreviewRequest request);
+
+    Set<ArticleDetails> sort(SortSettings sortSettings);
+    Set<ArticleDetails> search(String searchKeyword);
+    Set<ArticleDetails> filter(String facultyName);
 }

@@ -3,6 +3,7 @@ package de.fherfurt.news.articles.entity;
 import de.fherfurt.news.core.persistance.Database;
 import de.fherfurt.news.core.persistance.DevDatabase;
 import de.fherfurt.news.core.persistance.PreviewRequest;
+import de.fherfurt.news.core.persistance.SortSettings;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 
 import java.util.HashSet;
@@ -40,13 +41,41 @@ public class DevArticleRepository implements ArticleRepository{
     public void save(ArticleDetails article){
         database.save(article);
     }
+
     @Override
     public void delete(int id) throws EntryNotFoundException {
         database.delete(id);
     }
+
+    /* TODO do we need that???
     @Override
-    public Optional<Set<BaseArticle>> getArticlePreviews(PreviewRequest request){
-        Set<BaseArticle> articlePreviews = new HashSet<>();
-        return Optional.ofNullable(articlePreviews);
+    public Optional<Set<BaseArticle>> getArticlePreviews(){
+        return null;
+    }
+    */
+
+    @Override
+    public Set<ArticleDetails> fetchAll(){
+        return new HashSet<>(database.getMap().values());
+    }
+
+    @Override
+    public Optional<Set<BaseArticle>> getArticlePreviews(PreviewRequest request) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Set<ArticleDetails> sort(SortSettings sortSettings){
+        return database.sort(sortSettings);
+    }
+
+    @Override
+    public Set<ArticleDetails> search(String searchKeyword) {
+        return database.search(searchKeyword);
+    }
+
+    @Override
+    public Set<ArticleDetails> filter(String facultyName) {
+        return database.filter(facultyName);
     }
 }

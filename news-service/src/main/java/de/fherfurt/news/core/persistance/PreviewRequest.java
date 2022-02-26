@@ -8,6 +8,6 @@ package de.fherfurt.news.core.persistance;
 
 public class PreviewRequest {
     public String keyword;
-    public int idFaculty;
+    public String facultyName;
     public SortSettings sortSettings;
 }
