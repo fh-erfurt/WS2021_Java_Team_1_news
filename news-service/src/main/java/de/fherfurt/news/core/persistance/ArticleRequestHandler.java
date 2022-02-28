@@ -41,7 +41,7 @@ public class ArticleRequestHandler {
         Set<ArticleDetails> searchedArticles = new ArticleSearchModule(request.keyword, filteredArticles).search();
         //sorting those
         Set<ArticleDetails> sortedArticles = searchedArticles.stream()
-                .sorted(new ArticleSortModule(request.sortSettings))
+                .sorted(new ArticleSortComparator(request.sortSettings))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
         return sortedArticles;
     }

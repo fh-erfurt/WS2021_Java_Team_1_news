@@ -30,7 +30,7 @@ public class DevDatabase implements Database<ArticleDetails>{
     @Override
     public Set<ArticleDetails> sort(SortSettings sortSettings){
         List<ArticleDetails> sortedArticles = new ArrayList<>(map.values());
-        sortedArticles.sort(new ArticleSortModule(sortSettings));
+        sortedArticles.sort(new ArticleSortComparator(sortSettings));
         return new HashSet<>(sortedArticles);
     }
 

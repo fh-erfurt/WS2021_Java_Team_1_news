@@ -6,12 +6,12 @@ import lombok.AllArgsConstructor;
 import java.util.Comparator;
 
 /**
- * TODO add comments
+ *
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
 @AllArgsConstructor
-public class ArticleSortModule implements Comparator<ArticleDetails> {
+public class ArticleSortComparator implements Comparator<ArticleDetails> {
 
     public final SortSettings sortSettings;
 
@@ -19,12 +19,7 @@ public class ArticleSortModule implements Comparator<ArticleDetails> {
     public int compare(ArticleDetails article1,ArticleDetails article2) {
 
         int result = 0;
-        int sortDirection = 0;
-
-        switch (sortSettings.sortDirection){
-            case ASC -> sortDirection = 1;
-            case DESC -> sortDirection = -1;
-        }
+        int sortDirection = (sortSettings.sortDirection == SortDirection.ASC) ? 1 : -1;
 
         switch (sortSettings.sortPriority){
             case DATE -> result = article1.getDate().compareTo(article2.getDate());
@@ -33,7 +28,6 @@ public class ArticleSortModule implements Comparator<ArticleDetails> {
             case LANGUAGE -> result = article1.getLanguage().compareTo(article2.getLanguage());
             case PRIORITY -> result = article1.getPriority().compareTo(article2.getPriority());
         }
-
         return result * sortDirection;
     }
 }
