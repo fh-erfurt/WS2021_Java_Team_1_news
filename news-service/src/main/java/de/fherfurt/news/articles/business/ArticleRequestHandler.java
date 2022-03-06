@@ -1,13 +1,14 @@
-package de.fherfurt.news.core.persistance;
+package de.fherfurt.news.articles.business;
 
 
+import de.fherfurt.news.articles.business.modules.ArticleSearchModule;
+import de.fherfurt.news.articles.business.modules.ArticleSortModule;
 import de.fherfurt.news.articles.entity.ArticleDetails;
 import de.fherfurt.news.articles.entity.ArticleRepository;
 import de.fherfurt.news.articles.entity.DevArticleRepository;
+import de.fherfurt.news.core.persistance.PreviewRequest;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * TODO handle things like empty keywords and other cases
@@ -17,9 +18,6 @@ import java.util.stream.Collectors;
 public class ArticleRequestHandler {
 
     private ArticleRequestHandler instance;
-    private ArticleRequestHandler(){
-
-    }
 
     public ArticleRequestHandler getInstance(){
         if (this.instance == null){
@@ -40,10 +38,7 @@ public class ArticleRequestHandler {
         //searching on filtered articles
         Set<ArticleDetails> searchedArticles = new ArticleSearchModule(request.keyword, filteredArticles).search();
         //sorting those
-        Set<ArticleDetails> sortedArticles = searchedArticles.stream()
-                .sorted(new ArticleSortComparator(request.sortSettings))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-        return sortedArticles;
+        return new ArticleSortModule(request.sortSettings,searchedArticles.stream().toList()).sort();
     }
 
     private ArticleRepository repository;

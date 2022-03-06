@@ -1,13 +1,18 @@
-package de.fherfurt.news.core.persistance;
+package de.fherfurt.news.core.persistance.dev;
 
+import de.fherfurt.news.articles.business.modules.ArticleFilterModule;
+import de.fherfurt.news.articles.business.modules.ArticleSearchModule;
+import de.fherfurt.news.articles.entity.ArticleSortComparator;
 import de.fherfurt.news.articles.entity.ArticleDetails;
+import de.fherfurt.news.core.persistance.Database;
+import de.fherfurt.news.core.persistance.SortSettings;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 import lombok.Getter;
 
 import java.util.*;
 
 
-public class DevDatabase implements Database<ArticleDetails>{
+public class DevDatabase implements Database<ArticleDetails> {
 
     @Getter Map<Integer, ArticleDetails> map = new HashMap<>();
     @Override

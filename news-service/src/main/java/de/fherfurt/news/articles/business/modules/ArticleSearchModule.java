@@ -1,4 +1,4 @@
-package de.fherfurt.news.core.persistance;
+package de.fherfurt.news.articles.business.modules;
 
 import de.fherfurt.news.articles.entity.ArticleDetails;
 import lombok.AllArgsConstructor;
@@ -14,26 +14,26 @@ import java.util.function.Predicate;
  */
 @AllArgsConstructor
 public class ArticleSearchModule {
-    public final String searchKeyword;
+    public final String searchTerm;
     public final Set<ArticleDetails> articles;
 
+    public Set<ArticleDetails> search() {
+        //guard clause to prevent searching for an empty String
+        if(searchTerm.isEmpty()) return articles;
 
-    Set<ArticleDetails> search() {
         Set<ArticleDetails> matchingArticles = new HashSet<>();
         for (var article: articles) {
-           if(compareArticleAttributesWithKeyword(article)) matchingArticles.add(article);
+           if(compareArticleAttributesWithSearchTerm(article)) matchingArticles.add(article);
         }
         return matchingArticles;
     }
 
-    private boolean compareArticleAttributesWithKeyword(ArticleDetails article){
+    private boolean compareArticleAttributesWithSearchTerm(ArticleDetails article){
         //comparing title
-        if(article.getTitle().contains(searchKeyword)) return true;
+        if(article.getTitle().contains(searchTerm)) return true;
         //comparing if searchKeyword matches with any keyword in an article
-        Predicate<String> searchKeywordPredicate = Predicate.isEqual(searchKeyword);
+        Predicate<String> searchKeywordPredicate = Predicate.isEqual(searchTerm);
         if(article.getKeywords().stream().anyMatch(searchKeywordPredicate)) return true;
-
-        //TODO maybe add other search options
 
         return false;
     }

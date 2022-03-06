@@ -1,4 +1,4 @@
-package de.fherfurt.news.core.persistance;
+package de.fherfurt.news.articles.business.modules;
 
 import de.fherfurt.news.articles.entity.ArticleDetails;
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
 package de.fherfurt.news.articles.entity;
 
+import de.fherfurt.news.articles.entity.dev.BaseArticle;
 import de.fherfurt.news.core.persistance.PreviewRequest;
 import de.fherfurt.news.core.persistance.Repository;
 import de.fherfurt.news.core.persistance.SortSettings;
@@ -23,7 +24,7 @@ public interface ArticleRepository extends Repository<ArticleDetails> {
      * @param request Request handles the information's for fetching Article Previews (SortSettings,keyword,facultyId)
      * @return returns a set of ArticlePreviews if there are some, returns empty{@link Optional} if no ArticlePreview is available
      */
-    Optional<Set<BaseArticle>> getArticlePreviews(PreviewRequest request);
+    Optional<Set<BaseArticle>> getBaseArticles(PreviewRequest request);
 
     Set<ArticleDetails> sort(SortSettings sortSettings);
     Set<ArticleDetails> search(String searchKeyword);

@@ -1,6 +1,8 @@
-package de.fherfurt.news.core.persistance;
+package de.fherfurt.news.articles.entity;
 
 import de.fherfurt.news.articles.entity.ArticleDetails;
+import de.fherfurt.news.core.persistance.SortDirection;
+import de.fherfurt.news.core.persistance.SortSettings;
 import lombok.AllArgsConstructor;
 
 import java.util.Comparator;

@@ -1,7 +1,8 @@
 package de.fherfurt.news.articles.entity;
 
+import de.fherfurt.news.articles.entity.dev.BaseArticle;
 import de.fherfurt.news.core.persistance.Database;
-import de.fherfurt.news.core.persistance.DevDatabase;
+import de.fherfurt.news.core.persistance.dev.DevDatabase;
 import de.fherfurt.news.core.persistance.PreviewRequest;
 import de.fherfurt.news.core.persistance.SortSettings;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
@@ -43,39 +44,32 @@ public class DevArticleRepository implements ArticleRepository{
     }
 
     @Override
-    public void delete(int id) throws EntryNotFoundException {
-        database.delete(id);
+    public void delete(int id) throws EntryNotFoundException { database.delete(id); }
+
+    @Override
+    public Optional<Set<BaseArticle>> getBaseArticles(PreviewRequest request){
+        Set<BaseArticle> articlePreviews = new HashSet<>();
+        return Optional.ofNullable(articlePreviews);
     }
 
-    /* TODO do we need that???
+    /*TODO check if we need to implement everything */
+
     @Override
-    public Optional<Set<BaseArticle>> getArticlePreviews(){
+    public Set<ArticleDetails> fetchAll() {
         return null;
     }
-    */
-
     @Override
-    public Set<ArticleDetails> fetchAll(){
-        return new HashSet<>(database.getMap().values());
-    }
-
-    @Override
-    public Optional<Set<BaseArticle>> getArticlePreviews(PreviewRequest request) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Set<ArticleDetails> sort(SortSettings sortSettings){
-        return database.sort(sortSettings);
+    public Set<ArticleDetails> sort(SortSettings sortSettings) {
+        return null;
     }
 
     @Override
     public Set<ArticleDetails> search(String searchKeyword) {
-        return database.search(searchKeyword);
+        return null;
     }
 
     @Override
     public Set<ArticleDetails> filter(String facultyName) {
-        return database.filter(facultyName);
+        return null;
     }
 }

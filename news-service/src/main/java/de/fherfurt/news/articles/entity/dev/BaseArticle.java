@@ -1,5 +1,7 @@
-package de.fherfurt.news.articles.entity;
+package de.fherfurt.news.articles.entity.dev;
 
+import de.fherfurt.news.articles.entity.Language;
+import de.fherfurt.news.articles.entity.Priority;
 import de.fherfurt.news.core.persistance.Entry;
 
 import lombok.Getter;

@@ -2,7 +2,6 @@ package de.fherfurt.news.core.persistance;
 
 import lombok.Data;
 
-
 /**
  * basic class for all entries
  *

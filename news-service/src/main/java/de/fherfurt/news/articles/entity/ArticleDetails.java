@@ -1,5 +1,6 @@
 package de.fherfurt.news.articles.entity;
 
+import de.fherfurt.news.articles.entity.dev.BaseArticle;
 import lombok.Getter;
 import lombok.Setter;
 
