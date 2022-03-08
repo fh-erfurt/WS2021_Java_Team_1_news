@@ -4,7 +4,6 @@ import de.fherfurt.appointments.client.transfer.objects.NewsFaculty;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -21,6 +20,11 @@ public class DevFacultiesService implements FacultiesService {
 
     @Override
     public Optional<NewsFaculty> isFacultynameValid(String name){
-        return faculties.stream().filter(user -> Objects.equals(user.getName(), name)).findFirst();
+        for (int i=0; i < 4; i++){
+            if(faculties.get(i).getName().equals(name)){
+                return Optional.ofNullable(faculties.get(i));
+            }
+        }
+        return Optional.empty();
     }
 }
