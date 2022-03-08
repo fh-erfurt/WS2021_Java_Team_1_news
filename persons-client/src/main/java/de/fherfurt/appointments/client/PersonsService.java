@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public interface PersonsService {
 
-    Optional<NewsPerson> getPersonById(int id);
+    Optional<NewsPerson> getPersonByID(int id);
 
     Optional<NewsPerson> getPersonIdByMail(String mail);
 }
