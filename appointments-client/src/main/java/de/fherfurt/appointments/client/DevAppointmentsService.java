@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  */
 public class DevAppointmentsService implements AppointmentsService{
 
-    private final List<NewsAppointment> persons = Arrays.asList(
+    private final List<NewsAppointment> appointments = Arrays.asList(
             new NewsAppointment(1, "appointment1", LocalDateTime.of(2022, 02, 21, 0, 0), "Mensa"),
             new NewsAppointment(2, "appointment2", LocalDateTime.of(2022, 02, 27, 0, 0), "Raum 1"),
             new NewsAppointment(3, "appointment3", LocalDateTime.of(2022, 03, 06, 0, 0), "Raum 2"),
@@ -22,11 +22,16 @@ public class DevAppointmentsService implements AppointmentsService{
 
     @Override
     public Optional<NewsAppointment> getAppointmentById(int id){
-        return Optional.ofNullable(persons.get(id));
+        for (int i=0; i < 4; i++){
+            if(appointments.get(i).getId() == id){
+                return Optional.ofNullable(appointments.get(i));
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<NewsAppointment> getAppointmentByTitle(String title){
-        return persons.stream().filter(user -> Objects.equals(user.getTitle(), title)).findFirst();
+        return appointments.stream().filter(user -> Objects.equals(user.getTitle(), title)).findFirst();
     }
 }
