@@ -11,10 +11,5 @@ public interface AppointmentsService {
 
     Optional<NewsAppointment> getAppointmentById(int id);
 
-    /**
-     * Eher so?
-     *     Optional<NewsAppointment> findBy(int id);
-     */
-
     Optional<NewsAppointment> getAppointmentIdByTitle(String title);
 }
