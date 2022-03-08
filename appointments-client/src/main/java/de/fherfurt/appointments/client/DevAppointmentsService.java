@@ -26,7 +26,7 @@ public class DevAppointmentsService implements AppointmentsService{
     }
 
     @Override
-    public Optional<NewsAppointment> getAppointmentIdByTitle(String title){
+    public Optional<NewsAppointment> getAppointmentByTitle(String title){
         return persons.stream().filter(user -> Objects.equals(user.getTitle(), title)).findFirst();
     }
 }
