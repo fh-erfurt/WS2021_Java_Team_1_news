@@ -21,11 +21,16 @@ public class DevPersonsService implements PersonsService {
 
     @Override
     public Optional<NewsPerson> getPersonByID(int id){
-        return Optional.ofNullable(persons.get(id));
+        for (int i=0; i < 4; i++){
+            if(persons.get(i).getId() == id){
+                return Optional.ofNullable(persons.get(i));
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
-    public Optional<NewsPerson> getPersonIdByMail(String mail){
+    public Optional<NewsPerson> getPersonByMail(String mail){
         return persons.stream().filter(user -> Objects.equals(user.getMail(), mail)).findFirst();
     }
 }

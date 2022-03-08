@@ -11,5 +11,5 @@ public interface PersonsService {
 
     Optional<NewsPerson> getPersonByID(int id);
 
-    Optional<NewsPerson> getPersonIdByMail(String mail);
+    Optional<NewsPerson> getPersonByMail(String mail);
 }
