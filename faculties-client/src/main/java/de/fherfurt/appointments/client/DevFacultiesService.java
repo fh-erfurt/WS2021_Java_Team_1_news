@@ -20,12 +20,7 @@ public class DevFacultiesService implements FacultiesService {
     );
 
     @Override
-    public Optional<NewsFaculty> getFacultyNameById(int id){
-        return Optional.ofNullable(faculties.get(id));
-    }
-
-    @Override
-    public Optional<NewsFaculty> getFacultyIdByName(String name){
+    public Optional<NewsFaculty> isFacultynameValid(String name){
         return faculties.stream().filter(user -> Objects.equals(user.getName(), name)).findFirst();
     }
 }

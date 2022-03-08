@@ -9,7 +9,5 @@ import java.util.Optional;
  */
 public interface FacultiesService {
 
-    Optional<NewsFaculty> getFacultyNameById(int id);
-
-    Optional<NewsFaculty> getFacultyIdByName(String name);
+    Optional<NewsFaculty> isFacultynameValid(String name);
 }
