@@ -18,6 +18,7 @@ import java.util.Set;
 public class ArticleRequestHandler {
 
     private ArticleRequestHandler instance;
+    private ArticleRepository repository;
 
     public ArticleRequestHandler getInstance(){
         if (this.instance == null){
@@ -29,7 +30,6 @@ public class ArticleRequestHandler {
     private void initialize(){
         this.repository = new DevArticleRepository();
         this.instance = new ArticleRequestHandler();
-
     }
 
     public Set<ArticleDetails> handleRequest(PreviewRequest request) {
@@ -41,5 +41,5 @@ public class ArticleRequestHandler {
         return new ArticleSortModule(request.sortSettings,searchedArticles.stream().toList()).sort();
     }
 
-    private ArticleRepository repository;
+
 }
