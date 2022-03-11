@@ -7,7 +7,7 @@ public class ArticleValidator {
 
 
     /**
-     * no validated:
+     * not validated:
      * clicks, keywords, wasModified, language, priority
      * @return
      */
@@ -18,11 +18,11 @@ public class ArticleValidator {
     }
 
     private boolean validateResponsiblePersonIds(){
-
+        if()
     }
 
     private boolean validateAuthorId(){
-
+        if()
     }
 
     private boolean validateAppointmentId(){
