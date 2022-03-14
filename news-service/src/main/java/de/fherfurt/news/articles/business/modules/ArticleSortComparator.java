@@ -1,8 +1,6 @@
-package de.fherfurt.news.articles.entity;
+package de.fherfurt.news.articles.business.modules;
 
-import de.fherfurt.news.articles.entity.ArticleDetails;
-import de.fherfurt.news.core.persistance.SortDirection;
-import de.fherfurt.news.core.persistance.SortSettings;
+import de.fherfurt.news.articles.entity.Article;
 import lombok.AllArgsConstructor;
 
 import java.util.Comparator;
@@ -13,12 +11,12 @@ import java.util.Comparator;
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
 @AllArgsConstructor
-public class ArticleSortComparator implements Comparator<ArticleDetails> {
+public class ArticleSortComparator implements Comparator<Article> {
 
     public final SortSettings sortSettings;
 
     @Override
-    public int compare(ArticleDetails article1,ArticleDetails article2) {
+    public int compare(Article article1,Article article2) {
 
         int result = 0;
         int sortDirection = (sortSettings.sortDirection == SortDirection.ASC) ? 1 : -1;

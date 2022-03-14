@@ -1,12 +1,10 @@
 package de.fherfurt.news.articles.business;
 
 
-import de.fherfurt.news.articles.business.modules.ArticleSearchModule;
-import de.fherfurt.news.articles.business.modules.ArticleSortModule;
-import de.fherfurt.news.articles.entity.ArticleDetails;
-import de.fherfurt.news.articles.entity.ArticleRepository;
-import de.fherfurt.news.articles.entity.DevArticleRepository;
-import de.fherfurt.news.core.persistance.PreviewRequest;
+import de.fherfurt.news.articles.business.modules.*;
+import de.fherfurt.news.articles.entity.Article;
+import de.fherfurt.news.core.persistance.dev.ArticleRepository;
+import de.fherfurt.news.core.persistance.Repository;
 
 import java.util.Set;
 
@@ -18,7 +16,7 @@ import java.util.Set;
 public class ArticleRequestHandler {
 
     private ArticleRequestHandler instance;
-    private ArticleRepository repository;
+    private Repository<Article> repository = new ArticleRepository();
 
     public ArticleRequestHandler getInstance(){
         if (this.instance == null){
@@ -28,18 +26,30 @@ public class ArticleRequestHandler {
     }
 
     private void initialize(){
-        this.repository = new DevArticleRepository();
+        this.repository = new ArticleRepository();
         this.instance = new ArticleRequestHandler();
     }
 
-    public Set<ArticleDetails> handleRequest(PreviewRequest request) {
+    /**
+     * find certain articles with given parameters {@link PreviewRequest}
+     *
+     * @param request Request contains the facultyName,searchTerm and the sortSettings
+     * @return
+     */
+    public Set<Article> handleRequest(PreviewRequest request) {
+        //fetching all current articles
+        Set<Article> allCurrentArticles = repository.fetchAll();
+
+        //TODO das muss abgefangen werden
+        //guard clause to prevent unnecessary computing
+        if (allCurrentArticles.isEmpty()) return null;
+
         //fetching current articles and filtering them
-        Set<ArticleDetails> filteredArticles = repository.filter(request.facultyName);
+        Set<Article> filteredArticles = new ArticleFilterModule(request.facultyName, allCurrentArticles).filter();
         //searching on filtered articles
-        Set<ArticleDetails> searchedArticles = new ArticleSearchModule(request.keyword, filteredArticles).search();
-        //sorting those
+        Set<Article> searchedArticles = new ArticleSearchModule(request.searchTerm, filteredArticles).search();
+        //sorting those and returning them
         return new ArticleSortModule(request.sortSettings,searchedArticles.stream().toList()).sort();
     }
-
 
 }

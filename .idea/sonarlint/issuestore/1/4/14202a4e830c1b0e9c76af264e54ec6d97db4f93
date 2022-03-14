@@ -1,8 +1,0 @@
-
-p
-java:S1104
-"SMake keyword a static final constant or non-public and provide accessors if needed.(ØÃóú8¡¹Œøõ/
-s
-java:S1104"WMake facultyName a static final constant or non-public and provide accessors if needed.(×«İI8›øŒøõ/
-u
-java:S1104"XMake sortSettings a static final constant or non-public and provide accessors if needed.(÷‰æ¬8¡¹Œøõ/

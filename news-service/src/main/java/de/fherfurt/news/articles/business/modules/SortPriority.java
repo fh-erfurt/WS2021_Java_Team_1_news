@@ -1,4 +1,4 @@
-package de.fherfurt.news.core.persistance;
+package de.fherfurt.news.articles.business.modules;
 
 /**
  * this enum is used for sorting after a specific attribute

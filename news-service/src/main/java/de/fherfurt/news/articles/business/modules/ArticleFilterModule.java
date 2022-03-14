@@ -1,6 +1,6 @@
 package de.fherfurt.news.articles.business.modules;
 
-import de.fherfurt.news.articles.entity.ArticleDetails;
+import de.fherfurt.news.articles.entity.Article;
 import lombok.AllArgsConstructor;
 
 import java.util.HashSet;
@@ -15,10 +15,10 @@ import java.util.Set;
 public class ArticleFilterModule {
 
     public final String facultyName;
-    public final Set<ArticleDetails> articles;
+    public final Set<Article> articles;
 
-    public Set<ArticleDetails> filter(){
-        Set<ArticleDetails> filteredArticles = new HashSet<>();
+    public Set<Article> filter(){
+        Set<Article> filteredArticles = new HashSet<>();
 
         for (var article: articles) {
             if (article.getFacultyName().equals(facultyName)) filteredArticles.add(article);

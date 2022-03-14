@@ -1,7 +1,8 @@
 package de.fherfurt.news.core.persistance;
 
+import de.fherfurt.news.core.entity.Entry;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
-import java.util.Optional;
+
 import java.util.Set;
 
 /**
@@ -15,12 +16,12 @@ import java.util.Set;
 public interface Repository<TYPE extends Entry> {
 
     /**
-     * Find an entry by its id. If there is no entry, empty{@link Optional} is returned
+     * Find an entry by its id. If there is no entry, an EntryNotFoundException is thrown
      *
      * @param id id of the searched entry
      * @return The entry or empty
      */
-    Optional<TYPE> findBy(int id);
+    TYPE findBy(int id) throws EntryNotFoundException;
 
     /**
      * Save an entity to the underlying storage. It doesn't matter, if the entity is new or already saved.
@@ -37,6 +38,11 @@ public interface Repository<TYPE extends Entry> {
      */
     void delete(int id) throws EntryNotFoundException;
 
+    /**
+     * Fetch all current Entries of the underlying storage.
+     *
+     * @return all existing entries
+     */
     Set<TYPE> fetchAll();
 
 }
