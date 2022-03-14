@@ -3,7 +3,6 @@ package de.fherfurt.news.core.business;
 import de.fherfurt.news.articles.entity.Article;
 
 public class ArticleValidator {
-    private Article article;
 
 
     /**
@@ -11,29 +10,29 @@ public class ArticleValidator {
      * clicks, keywords, wasModified, language, priority
      * @return
      */
-    public boolean validateArticle(){
+    public boolean validateArticle(Article article){
         if(article.getTitle().equals(null) || article.getContent().equals(null)){
             return false;
         }
     }
 
-    private boolean validateResponsiblePersonIds(){
+    private boolean validateResponsiblePersonIds(Article article){
         if()
     }
 
-    private boolean validateAuthorId(){
+    private boolean validateAuthorId(Article article){
         if()
     }
 
-    private boolean validateAppointmentId(){
+    private boolean validateAppointmentId(Article article){
 
     }
 
-    private boolean validateFacultyName(){
+    private boolean validateFacultyName(Article article){
 
     }
 
-    private boolean validateDate(){
+    private boolean validateDate(Article article){
 
     }
 }
