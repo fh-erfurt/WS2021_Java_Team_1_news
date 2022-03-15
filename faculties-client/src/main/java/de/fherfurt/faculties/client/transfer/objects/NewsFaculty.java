@@ -1,4 +1,4 @@
-package de.fherfurt.appointments.client.transfer.objects;
+package de.fherfurt.faculties.client.transfer.objects;
 
 /**
  * Represents the Faculty information relevant for the News Module.

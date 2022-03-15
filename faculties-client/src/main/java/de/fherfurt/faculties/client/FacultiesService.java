@@ -1,6 +1,6 @@
-package de.fherfurt.appointments.client;
+package de.fherfurt.faculties.client;
 
-import de.fherfurt.appointments.client.transfer.objects.NewsFaculty;
+import de.fherfurt.faculties.client.transfer.objects.NewsFaculty;
 
 import java.util.Optional;
 
