@@ -5,8 +5,7 @@ import de.fherfurt.appointments.client.*;
 import de.fherfurt.faculties.client.*;
 import de.fherfurt.persons.client.*;
 
-import java.time.Duration;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -34,23 +33,31 @@ public class ArticleValidator {
     }
 
     private boolean validateTitle(){
-        if(article.getTitle().equals(null)){
+        if(article.getTitle() == null){
             return false;
         }
         return true;
     }
 
     private boolean validateContent(){
-        if(article.getContent().equals(null)){
+        if(article.getContent() == null){
             return false;
         }
         return true;
     }
 
     private boolean validateResponsiblePersonIds(){
-        for ( int id : article.getResponsiblePersonIds()){
-            if(personsService.getPersonByID(id).equals(Optional.empty())){
-                return false;
+        if(article.getResponsiblePersonIds() == null){
+            return true;
+        }
+        else if(article.getResponsiblePersonIds().isEmpty()){
+            return true;
+        }
+        else {
+            for ( int id : article.getResponsiblePersonIds()){
+                if(personsService.getPersonByID(id).equals(Optional.empty())){
+                    return false;
+                }
             }
         }
         return true;
@@ -64,7 +71,10 @@ public class ArticleValidator {
     }
 
     private boolean validateAppointmentId(){
-        if(appointmentsService.getAppointmentById(article.getAppointmentId()).equals(Optional.empty())){
+        if(article.getAppointmentId() == 0){
+            return true;
+        }
+        else if(appointmentsService.getAppointmentById(article.getAppointmentId()).equals(Optional.empty())){
             return false;
         }
         return true;
@@ -75,10 +85,12 @@ public class ArticleValidator {
     }
 
     private boolean validateDate(){
-        if(Duration.between(LocalDate.now(), article.getDate()).compareTo(Duration.between(LocalDate.now(), LocalDate.now().plusYears(3))) > 0
-                || Duration.between(LocalDate.now(), article.getDate()).compareTo(Duration.between(LocalDate.now(), LocalDate.now().minusMonths(1))) < 0){
+        if(article.getDate() == null){
             return false;
         }
-        return true;
+        else if(article.getDate().isBefore(LocalDateTime.now()) || article.getDate().isEqual(LocalDateTime.now())){
+            return true;
+        }
+        return false;
     }
 }
