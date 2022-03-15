@@ -1,4 +1,4 @@
-package de.fherfurt.appointments.client;
+package de.fherfurt.persons.client;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

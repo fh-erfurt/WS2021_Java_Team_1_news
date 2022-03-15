@@ -1,6 +1,6 @@
-package de.fherfurt.appointments.client;
+package de.fherfurt.persons.client;
 
-import de.fherfurt.appointments.client.transfer.objects.NewsPerson;
+import de.fherfurt.persons.client.transfer.objects.NewsPerson;
 
 import java.util.Arrays;
 import java.util.List;
