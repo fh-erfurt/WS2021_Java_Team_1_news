@@ -8,6 +8,6 @@ class DevFacultiesServiceTest {
     @Test
     void shouldReturn3(){
         DevFacultiesService devFacultiesService = new DevFacultiesService();
-        Assertions.assertEquals(3, devFacultiesService.isFacultynameValid("faculty3").get().getId());
+        Assertions.assertEquals(true, devFacultiesService.isFacultynameValid("faculty3"));
     }
 }

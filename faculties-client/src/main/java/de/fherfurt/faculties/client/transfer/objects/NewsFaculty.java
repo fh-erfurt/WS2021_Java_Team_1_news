@@ -8,20 +8,10 @@ package de.fherfurt.faculties.client.transfer.objects;
  */
 public class NewsFaculty {
 
-    private int id;
     private String name;
 
-    public NewsFaculty(int id, String name){
-        this.id = id;
+    public NewsFaculty(String name){
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
