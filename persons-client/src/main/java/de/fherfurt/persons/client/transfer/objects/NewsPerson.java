@@ -1,4 +1,4 @@
-package de.fherfurt.appointments.client.transfer.objects;
+package de.fherfurt.persons.client.transfer.objects;
 
 /**
  * Represents the Person information relevant for the News Module.
