@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.image.BufferedImage;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class Article extends Entry {
     private int clicks;
     private String facultyName;
     private Set<String> keywords;
-    private Date date;
+    private LocalDateTime date;
     private boolean wasModified;
     Language language;
     Priority priority;
