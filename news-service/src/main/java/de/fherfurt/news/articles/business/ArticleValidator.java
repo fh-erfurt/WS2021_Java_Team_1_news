@@ -7,30 +7,44 @@ import de.fherfurt.persons.client.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Year;
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
+/**
+ * not validated:
+ * clicks, keywords, wasModified, language, priority
+ *
+ *  @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
+ */
 public class ArticleValidator {
 
     private Article article;
 
+    //implementation of the interfaces
     private AppointmentsService appointmentsService = new DevAppointmentsService();
     private FacultiesService facultiesService = new DevFacultiesService();
     private PersonsService personsService = new DevPersonsService();
 
-    /**
-     * not validated:
-     * clicks, keywords, wasModified, language, priority
-     * @return
-     */
     public boolean validateArticle(Article article){
         this.article = article;
 
-        if(article.getTitle().equals(null) || article.getContent().equals(null)){
+        if(validateTitle() && validateContent() && validateResponsiblePersonIds() && validateAuthorId() && validateAppointmentId() && validateFacultyName() && validateDate()){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateTitle(){
+        if(article.getTitle().equals(null)){
             return false;
         }
+        return true;
+    }
+
+    private boolean validateContent(){
+        if(article.getContent().equals(null)){
+            return false;
+        }
+        return true;
     }
 
     private boolean validateResponsiblePersonIds(){
