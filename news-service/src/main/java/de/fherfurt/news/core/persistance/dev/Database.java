@@ -8,6 +8,7 @@ import java.util.*;
 
 /**
  *
+ * @author Maximilian Roehr <maximilian.roehr@fh-erfurt.de>
  */
 public class Database {
 
@@ -20,13 +21,13 @@ public class Database {
      */
     public void save(Article article){
         if (article == null) return;
-        if (!map.containsKey(article.getId()) || article.getId() == 0){
+        if (map.containsKey(article.getId()) || article.getId() == 0){
             article.setId(createNewId());
         }
         map.put(article.getId(),article);
     }
 
-    private int createNewId() {
+    protected int createNewId() {
         if (map.size() == 0){
             return 1;
         }
@@ -42,7 +43,7 @@ public class Database {
         if(checkIfExists(id)){
             map.remove(id);
         }
-        else throw new EntryNotFoundException(Database.class.getTypeName() +": id is invalid");
+        else throw new EntryNotFoundException("Entry not found with the Id: " + id);
     }
 
     private boolean checkIfExists(int id){
@@ -50,15 +51,14 @@ public class Database {
     }
 
     public Article findBy(int id) throws EntryNotFoundException{
-        try{
+        if (map.get(id) == null) throw new EntryNotFoundException("Entry not found with the Id: " + id);
+        else{
             return map.get(id);
-        }
-        catch (Exception e){
-            throw new EntryNotFoundException("Entry not Found: " + id);
         }
     }
 
     public Set<Article> fetchAll() {
+        if (map.size() == 0) return Collections.emptySet();
         return new HashSet<>(map.values());
     }
 
