@@ -16,7 +16,7 @@ import java.util.TreeMap;
  */
 public class Database {
 
-    //using SortedMap because its the dev implementation
+    //using SortedMap because it's the dev implementation
     @Getter SortedMap<Integer, Article> map = new TreeMap<>();
 
     /**
