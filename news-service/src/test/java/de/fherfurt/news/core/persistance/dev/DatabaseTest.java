@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 /**
  * TODO add comments and edit predefined article content
  *
- *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
 class DatabaseTest {
@@ -26,22 +25,21 @@ class DatabaseTest {
 
     Article article1 = Article.builder()
             .withId(1)
-            .withTitle("Artikel 1")
-            .withContent("das ist Test Conten")
+            .withTitle("article 1")
+            .withContent("this is some test content")
             .build();
 
     Article article2 = Article.builder()
             .withId(2)
-            .withTitle("Artikel 2")
-            .withContent("das ist Test Conten")
+            .withTitle("article 2")
+            .withContent("this is some test content")
             .build();
 
     Article article3 = Article.builder()
             .withId(3)
-            .withTitle("Artikel 3")
-            .withContent("das ist Test Conten")
+            .withTitle("article 3")
+            .withContent("this is some test content")
             .build();
-
 
     @Test
     void save() {
@@ -58,22 +56,26 @@ class DatabaseTest {
     @Test
     void saveArticleWithSameId() {
 
-        Article testArticle1 = article1;
-        Article testArticle2 = article1;
+        Article testArticle = article1;
 
-        database.save(testArticle1);
-        database.save(testArticle2);
+        Assertions.assertEquals("this is some test content", testArticle.getContent());
 
-        Article savedTestArticle2 = database.getMap().get(testArticle2.getId());
+        Article overwritingArticle = Article.builder().withId(1).withContent("this is the new Content").build();
 
-        Assertions.assertEquals(2, savedTestArticle2.getId());
+        database.save(testArticle);
+        database.save(overwritingArticle);
+
+        Article overwrittenArticle = database.getMap().get(overwritingArticle.getId());
+
+        Assertions.assertEquals("this is the new Content", overwrittenArticle.getContent());
     }
 
     @Test
     void saveArticleWithCustomId() {
+        int testId = 25;
 
         Article customIdArticle = Article.builder()
-                .withId(25)
+                .withId(testId)
                 .withTitle("Custom ID Article")
                 .withContent("Placeholder")
                 .build();
@@ -81,7 +83,7 @@ class DatabaseTest {
         database.save(article1);
         database.save(customIdArticle);
 
-        Assertions.assertEquals(25, customIdArticle.getId());
+        Assertions.assertEquals(testId, customIdArticle.getId());
     }
 
     @Test
@@ -91,7 +93,7 @@ class DatabaseTest {
 
         database.save(noIdArticle);
 
-        //1 = first defaul id
+        //1 = first default id
         Assertions.assertEquals(1, noIdArticle.getId());
     }
 
@@ -113,7 +115,9 @@ class DatabaseTest {
         database.save(article1);
         database.save(article2);
         database.save(article3);
+
         int newId = database.createNewId();
+
         Assertions.assertEquals(4, newId);
     }
 
@@ -133,7 +137,7 @@ class DatabaseTest {
     }
 
     @Test
-    void deleteWithNoOccurringId() {
+    void deleteWithNoExistingId() {
         int idToTest = 25;
 
         database.save(article1);
@@ -147,6 +151,7 @@ class DatabaseTest {
     void findBy() {
         database.save(article1);
         Article foundArticle = null;
+
         try {
             foundArticle = database.findBy(1);
         } catch (EntryNotFoundException e) {
@@ -157,7 +162,7 @@ class DatabaseTest {
     }
 
     @Test
-    void findByNotOccurringId() {
+    void findByNotExistingId() {
         int idToTest = 25;
 
         database.save(article1);
@@ -175,9 +180,9 @@ class DatabaseTest {
 
         Set<Article> fetchedArticles = database.fetchAll();
 
-        Set<Article> expectedArticles =new HashSet<>(Arrays.asList(article1, article2, article3));
+        Set<Article> expectedArticles = new HashSet<>(Arrays.asList(article1, article2, article3));
 
-        Assertions.assertEquals(expectedArticles,fetchedArticles);
+        Assertions.assertEquals(expectedArticles, fetchedArticles);
     }
 
     @Test
@@ -186,5 +191,4 @@ class DatabaseTest {
 
         Assertions.assertEquals(Collections.emptySet(), fetchedArticles);
     }
-
 }
