@@ -13,5 +13,3 @@ D
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 €
 Pnews-service/src/main/java/de/fherfurt/news/articles/entity/NewsAppointment.java,a\b\ab721afb37d368d30298f2b34914b41a39532ae3
-‡
-Wnews-service/src/main/java/de/fherfurt/news/core/persistance/dev/ArticleRepository.java,6\b\6b2e8d8c85bc9deac1ca7314951128cd1eec608d
