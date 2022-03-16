@@ -9,3 +9,9 @@ H
 faculties-client/pom.xml,b\a\bac8f110e19a031ecf317b34a67c7ecbc472eb57
 D
 news-service/pom.xml,2\e\2e8094e0f96a4a39b18cea70f8125c31e1d63a95
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+€
+Pnews-service/src/main/java/de/fherfurt/news/articles/entity/NewsAppointment.java,a\b\ab721afb37d368d30298f2b34914b41a39532ae3
+‡
+Wnews-service/src/main/java/de/fherfurt/news/core/persistance/dev/ArticleRepository.java,6\b\6b2e8d8c85bc9deac1ca7314951128cd1eec608d
