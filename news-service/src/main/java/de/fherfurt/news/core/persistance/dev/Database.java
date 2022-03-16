@@ -4,7 +4,11 @@ import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 import lombok.Getter;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  *
