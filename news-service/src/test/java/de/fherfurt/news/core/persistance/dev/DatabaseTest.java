@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * TODO add comments
+ * TODO add comments and edit predefined article content
  *
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
