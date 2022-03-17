@@ -3,13 +3,10 @@ package de.fherfurt.news.articles.entity;
 import de.fherfurt.news.core.entity.Entry;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.management.ConstructorParameters;
 import java.awt.image.BufferedImage;
-import java.beans.ConstructorProperties;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +28,7 @@ public class Article extends Entry {
     private int clicks;
     private String facultyName;
     private Set<String> keywords;
-    private Date date;
+    private LocalDateTime date;
     private boolean wasModified;
     Language language;
     Priority priority;
@@ -45,7 +42,7 @@ public class Article extends Entry {
                     int appointmentId,
                     String facultyName,
                     Set<String> keywords,
-                    Date date,
+                    LocalDateTime date,
                     Language language,
                     Priority priority){
         super(id);
