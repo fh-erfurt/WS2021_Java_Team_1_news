@@ -6,6 +6,8 @@ import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.core.persistance.dev.ArticleRepository;
 import de.fherfurt.news.core.persistance.Repository;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -36,13 +38,13 @@ public class ArticleRequestHandler {
      * @param request Request contains the facultyName,searchTerm and the sortSettings
      * @return
      */
-    public Set<Article> handleRequest(PreviewRequest request) {
+    public List<Article> handleRequest(PreviewRequest request) {
         //fetching all current articles
         Set<Article> allCurrentArticles = repository.fetchAll();
 
         //TODO das muss abgefangen werden
         //guard clause to prevent unnecessary computing
-        if (allCurrentArticles.isEmpty()) return null;
+        if (allCurrentArticles.isEmpty()) return Collections.emptyList();
 
         //fetching current articles and filtering them
         Set<Article> filteredArticles = new ArticleFilterModule(request.facultyName, allCurrentArticles).filter();
