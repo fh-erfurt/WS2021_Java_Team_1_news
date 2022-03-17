@@ -9,6 +9,5 @@ public enum SortPriority {
     TITLE,
     DATE,
     CLICKS,
-    PRIORITY,
-    LANGUAGE
+    PRIORITY
 }
