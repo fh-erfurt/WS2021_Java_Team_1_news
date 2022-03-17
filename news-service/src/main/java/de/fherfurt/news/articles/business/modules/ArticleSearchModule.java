@@ -8,8 +8,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * TODO maybe use Regex for searching
- *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
 @AllArgsConstructor
@@ -19,22 +17,30 @@ public class ArticleSearchModule {
 
     public Set<Article> search() {
         //guard clause to prevent searching for an empty String
-        if(searchTerm.isEmpty()) return articles;
+        if (searchTerm.isEmpty()) return articles;
 
         Set<Article> matchingArticles = new HashSet<>();
-        for (var article: articles) {
-           if(compareArticleAttributesWithSearchTerm(article)) matchingArticles.add(article);
+        for (var article : articles) {
+            if (compareArticleAttributesWithSearchTerm(article)) matchingArticles.add(article);
         }
         return matchingArticles;
     }
 
-    private boolean compareArticleAttributesWithSearchTerm(Article article){
-        //comparing title
-        if(article.getTitle().contains(searchTerm)) return true;
-        //comparing if searchKeyword matches with any keyword in an article
-        Predicate<String> searchKeywordPredicate = Predicate.isEqual(searchTerm);
-        if(article.getKeywords().stream().anyMatch(searchKeywordPredicate)) return true;
 
+    /**
+     * @param article
+     * @return
+     */
+    private boolean compareArticleAttributesWithSearchTerm(Article article) {
+
+        //comparing title
+        if (article.getTitle() != null && article.getTitle().contains(searchTerm)) return true;
+
+        //comparing if searchKeyword matches with any keyword in an article
+        if (article.getKeywords() != null) {
+            Predicate<String> searchKeywordPredicate = Predicate.isEqual(searchTerm);
+            return article.getKeywords().stream().anyMatch(searchKeywordPredicate);
+        }
         return false;
     }
 }
