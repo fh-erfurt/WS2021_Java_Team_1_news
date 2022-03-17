@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * TODO maybe use Regex for searching
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
