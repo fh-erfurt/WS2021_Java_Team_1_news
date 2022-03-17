@@ -3,9 +3,8 @@ package de.fherfurt.news.articles.business.modules;
 import de.fherfurt.news.articles.entity.Article;
 import lombok.AllArgsConstructor;
 
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -17,8 +16,8 @@ public class ArticleSortModule {
     public final SortSettings sortSettings;
     public final List<Article> articleList;
 
-    public Set<Article> sort(){
+    public List<Article> sort(){
         articleList.sort(new ArticleSortComparator(sortSettings));
-        return new HashSet<>(articleList);
+        return new LinkedList<>(articleList);
     }
 }
