@@ -105,9 +105,10 @@ public class ArticleValidator {
         return true;
     }
 
-    private boolean validatePriority(){
-        if(article.getPriority() == null){
+    private boolean validatePriority() {
+        if (article.getPriority() == null) {
             return false;
         }
         return true;
+    }
 }
