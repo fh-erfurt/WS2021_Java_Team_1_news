@@ -158,4 +158,15 @@ class ArticleSortModuleTest {
 
         assertNotEquals(expectedArticles, sortedArticles);
     }
+
+    @Test
+    void sortWithNoGivenArticles() {
+        this.sortSettings = new SortSettings(SortDirection.ASC, SortPriority.TITLE);
+
+        List<Article> noArticles = new LinkedList<>();
+
+        List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, noArticles).sort();
+
+        Assertions.assertEquals(Collections.emptyList(), sortedArticles);
+    }
 }
