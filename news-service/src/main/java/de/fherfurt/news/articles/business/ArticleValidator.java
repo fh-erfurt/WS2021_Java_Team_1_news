@@ -12,6 +12,8 @@ import java.util.Optional;
  * not validated:
  * clicks, keywords, wasModified, language, priority
  *
+ * Validates an article to make sure there is no wrong information like a non-existent author ur a publishing date in the future.
+ *
  *  @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 public class ArticleValidator {

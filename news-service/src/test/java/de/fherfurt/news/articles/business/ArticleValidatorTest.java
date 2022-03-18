@@ -9,6 +9,9 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ *  @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
+ */
 class ArticleValidatorTest {
 
     @Test
