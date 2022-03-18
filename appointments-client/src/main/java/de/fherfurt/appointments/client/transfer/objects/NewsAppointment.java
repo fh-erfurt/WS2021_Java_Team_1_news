@@ -1,5 +1,8 @@
 package de.fherfurt.appointments.client.transfer.objects;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 /**
@@ -8,6 +11,8 @@ import java.time.LocalDateTime;
  *
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
+@Getter
+@Setter
 public class NewsAppointment {
     private int id;
     private String title;
@@ -18,38 +23,6 @@ public class NewsAppointment {
         this.id = id;
         this.title = title;
         this.date = date;
-        this.place = place;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
         this.place = place;
     }
 }
