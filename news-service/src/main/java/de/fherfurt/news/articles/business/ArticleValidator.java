@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * not validated:
- * clicks, keywords, wasModified, language, priority
+ * clicks, keywords, wasModified
  *
  * Validates an article to make sure there is no wrong information like a non-existent author ur a publishing date in the future.
  *
@@ -20,7 +20,9 @@ public class ArticleValidator {
 
     private Article article;
 
-    //implementation of the interfaces
+    /**
+     * implementation of the DevImplementation Interfaces. Must be replaced with actual interfaces for integration.
+     */
     private AppointmentsService appointmentsService = new DevAppointmentsService();
     private FacultiesService facultiesService = new DevFacultiesService();
     private PersonsService personsService = new DevPersonsService();
@@ -28,7 +30,7 @@ public class ArticleValidator {
     public boolean validateArticle(Article article){
         this.article = article;
 
-        if(validateTitle() && validateContent() && validateResponsiblePersonIds() && validateAuthorId() && validateAppointmentId() && validateFacultyName() && validateDate()){
+        if(validateTitle() && validateContent() && validateResponsiblePersonIds() && validateAuthorId() && validateAppointmentId() && validateFacultyName() && validateDate() && validateLanguage() && validatePriority()){
             return true;
         }
         return false;
@@ -95,4 +97,17 @@ public class ArticleValidator {
         }
         return false;
     }
+
+    private boolean validateLanguage(){
+        if(article.getLanguage() == null){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validatePriority(){
+        if(article.getPriority() == null){
+            return false;
+        }
+        return true;
 }
