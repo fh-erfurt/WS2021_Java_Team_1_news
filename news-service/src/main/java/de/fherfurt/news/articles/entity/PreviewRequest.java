@@ -1,5 +1,6 @@
-package de.fherfurt.news.articles.business.modules;
+package de.fherfurt.news.articles.entity;
 
+import de.fherfurt.news.articles.business.modules.entity.SortSettings;
 import lombok.Data;
 
 /**
