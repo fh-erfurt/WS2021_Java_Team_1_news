@@ -1,13 +1,18 @@
 package de.fherfurt.news.articles.business.modules;
 
+import de.fherfurt.news.articles.business.modules.entity.SortDirection;
+import de.fherfurt.news.articles.business.modules.entity.SortPriority;
+import de.fherfurt.news.articles.business.modules.entity.SortSettings;
 import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.articles.entity.Priority;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,8 +39,7 @@ class ArticleSortModuleTest {
             .withPriority(Priority.HIGH)
             .build();
 
-    private final Article article4 = Article.builder()
-            .build();
+    private final Article article4 = Article.builder().build();
 
     List<Article> articles = new LinkedList<>(Arrays.asList(article1, article2, article3));
 
@@ -54,8 +58,8 @@ class ArticleSortModuleTest {
         List<Article> expectedArticles = new LinkedList<>(Arrays.asList(article3, article1, article2));
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, articles).sort();
-
-        assertEquals(expectedArticles, sortedArticles);
+        
+        Assertions.assertEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -66,7 +70,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, this.articles).sort();
 
-        assertNotEquals(expectedArticles, sortedArticles);
+        Assertions.assertNotEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -79,7 +83,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, this.articles).sort();
 
-        assertNotEquals(expectedArticles, sortedArticles);
+        Assertions.assertNotEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -90,7 +94,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, this.articles).sort();
 
-        assertEquals(expectedArticles, sortedArticles);
+        Assertions.assertEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -101,7 +105,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, articles).sort();
 
-        assertEquals(expectedArticles, sortedArticles);
+        Assertions.assertEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -112,7 +116,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, articles).sort();
 
-        assertEquals(expectedArticles, sortedArticles);
+        Assertions.assertEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -123,7 +127,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, this.articles).sort();
 
-        assertNotEquals(expectedArticles, sortedArticles);
+        Assertions.assertNotEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -134,7 +138,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, this.articles).sort();
 
-        assertNotEquals(expectedArticles, sortedArticles);
+        Assertions.assertNotEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -145,7 +149,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, this.articles).sort();
 
-        assertNotEquals(expectedArticles, sortedArticles);
+        Assertions.assertNotEquals(expectedArticles, sortedArticles);
     }
 
     @Test
@@ -156,7 +160,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, this.articles).sort();
 
-        assertNotEquals(expectedArticles, sortedArticles);
+        Assertions.assertNotEquals(expectedArticles, sortedArticles);
     }
 
     @Test
