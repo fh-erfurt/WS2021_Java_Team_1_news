@@ -1,4 +1,4 @@
-package de.fherfurt.news.articles.business.modules;
+package de.fherfurt.news.articles.business.modules.entity;
 
 /**
  * this enum is used specify the direction of the sorting
