@@ -14,4 +14,8 @@ import lombok.Setter;
 public class NewsFaculty {
 
     private String name;
+
+    public NewsFaculty(String name){
+        this.name = name;
+    }
 }
