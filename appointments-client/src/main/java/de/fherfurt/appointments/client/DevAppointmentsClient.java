@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
-public class DevAppointmentsService implements AppointmentsService{
+public class DevAppointmentsClient implements AppointmentsClient {
 
     private final List<NewsAppointment> appointments = Arrays.asList(
             new NewsAppointment(1, "appointment1", LocalDateTime.of(2022, 02, 21, 0, 0), "Mensa"),
@@ -31,7 +31,7 @@ public class DevAppointmentsService implements AppointmentsService{
     }
 
     @Override
-    public Optional<NewsAppointment> getAppointmentByTitle(String title){
+    public Optional<NewsAppointment> getAppointmentByName(String title){
         return appointments.stream().filter(user -> Objects.equals(user.getTitle(), title)).findFirst();
     }
 }

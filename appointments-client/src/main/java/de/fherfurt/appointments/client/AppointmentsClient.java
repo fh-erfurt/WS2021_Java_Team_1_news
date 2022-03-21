@@ -7,9 +7,9 @@ import java.util.Optional;
 /**
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
-public interface AppointmentsService {
+public interface AppointmentsClient {
 
     Optional<NewsAppointment> getAppointmentById(int id);
 
-    Optional<NewsAppointment> getAppointmentByTitle(String title);
+    Optional<NewsAppointment> getAppointmentByName(String title);
 }

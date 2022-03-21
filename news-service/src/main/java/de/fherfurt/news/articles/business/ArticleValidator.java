@@ -23,7 +23,7 @@ public class ArticleValidator {
     /**
      * implementation of the DevImplementation Interfaces. Must be replaced with actual interfaces for integration.
      */
-    private AppointmentsService appointmentsService = new DevAppointmentsService();
+    private AppointmentsClient appointmentsClient = new DevAppointmentsClient();
     private FacultiesService facultiesService = new DevFacultiesService();
     private PersonClient personClient = new DevPersonClient();
 
@@ -74,7 +74,7 @@ public class ArticleValidator {
     private boolean validateAppointmentId() {
         if (article.getAppointmentId() == 0) {
             return true;
-        } else return !appointmentsService.getAppointmentById(article.getAppointmentId()).equals(Optional.empty());
+        } else return !appointmentsClient.getAppointmentById(article.getAppointmentId()).equals(Optional.empty());
     }
 
     private boolean validateFacultyName() {
