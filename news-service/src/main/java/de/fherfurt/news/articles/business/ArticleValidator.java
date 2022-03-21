@@ -25,7 +25,7 @@ public class ArticleValidator {
      */
     private AppointmentsService appointmentsService = new DevAppointmentsService();
     private FacultiesService facultiesService = new DevFacultiesService();
-    private PersonsService personsService = new DevPersonsService();
+    private PersonClient personClient = new DevPersonClient();
 
     public boolean validateArticle(Article article) {
         this.article = article;

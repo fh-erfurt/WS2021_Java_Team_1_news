@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
-public class DevPersonsService implements PersonsService {
+public class DevPersonClient implements PersonClient {
 
     private final List<NewsPerson> persons = Arrays.asList(
             new NewsPerson(1, "user 1", "user1@1mail.com", "12345678901"),
@@ -20,9 +20,9 @@ public class DevPersonsService implements PersonsService {
     );
 
     @Override
-    public Optional<NewsPerson> getPersonByID(int id){
-        for (int i=0; i < 4; i++){
-            if(persons.get(i).getId() == id){
+    public Optional<NewsPerson> getPersonByID(int id) {
+        for (int i = 0; i < 4; i++) {
+            if (persons.get(i).getId() == id) {
                 return Optional.ofNullable(persons.get(i));
             }
         }
@@ -30,7 +30,7 @@ public class DevPersonsService implements PersonsService {
     }
 
     @Override
-    public Optional<NewsPerson> getPersonByMail(String mail){
+    public Optional<NewsPerson> getPersonByMail(String mail) {
         return persons.stream().filter(user -> Objects.equals(user.getMail(), mail)).findFirst();
     }
 }
