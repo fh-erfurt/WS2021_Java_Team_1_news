@@ -8,6 +8,10 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
+ * this class is used to search through a given amount of articles with a search term
+ *
+ * current attributes which are searched for (title, keywords)
+ *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
 @AllArgsConstructor
