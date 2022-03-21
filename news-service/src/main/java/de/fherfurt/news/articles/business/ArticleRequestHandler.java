@@ -13,11 +13,18 @@ import de.fherfurt.news.core.persistance.Repository;
 import lombok.AllArgsConstructor;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 /**
- * TODO handle things like empty keywords and other cases
+ * This class is used to fetch articles with specific information
+ * you can
+ * filter (the facultyName),
+ * search (title and keywords), and
+ * sort({@link SortSettings})
+ * them with this class
+ *
  * all returned articles are always sorted, filtering and searching is optional
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
@@ -31,7 +38,7 @@ public class ArticleRequestHandler {
      * find certain articles with given parameters {@link PreviewRequest}
      *
      * @param request Request contains the facultyName,searchTerm and the sortSettings
-     * @return
+     * @return returns a list of articles, this list can also be empty
      */
     public List<Article> handleRequest(PreviewRequest request, RequestType requestType) {
         //fetching all current articles
@@ -40,7 +47,7 @@ public class ArticleRequestHandler {
         //guard clause to return an empty list immediately
         if (allCurrentArticles.isEmpty()) return Collections.emptyList();
 
-        Set<Article> articles = Collections.emptySet();
+        Set<Article> articles = allCurrentArticles;
 
         //checks if it has to filter articles
         if (requestType == RequestType.FILTER_SORT) {
@@ -56,12 +63,15 @@ public class ArticleRequestHandler {
     }
 
     /**
+     * little helper function to maintain readability
      *
-     * @param sortSettings
-     * @param articles
-     * @return
+     * @param sortSettings settings to sort after
+     * @param articles articles to be sorted
+     * @return returns the sorted articles
      */
     private List<Article> sortArticles(SortSettings sortSettings, Set<Article> articles) {
-        return new ArticleSortModule(sortSettings, articles.stream().toList()).sort();
+        List<Article> articleList = new LinkedList<>(articles);
+
+        return new ArticleSortModule(sortSettings, articleList).sort();
     }
 }
