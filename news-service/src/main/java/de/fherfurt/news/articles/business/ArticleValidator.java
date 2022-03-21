@@ -1,6 +1,6 @@
 package de.fherfurt.news.articles.business;
 
-import de.fherfurt.appointments.client.AppointmentsService;
+import de.fherfurt.appointments.client.AppointmentsClient;
 import de.fherfurt.faculties.client.FacultyClient;
 import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.persons.client.PersonClient;
@@ -18,8 +18,8 @@ public class ArticleValidator {
 
     private Article article;
 
-    public ArticleValidator(AppointmentsService appointmentsService, FacultyClient facultyClient, PersonClient personClient) {
-        this.appointmentsService = appointmentsService;
+    public ArticleValidator(AppointmentsClient appointmentsClient, FacultyClient facultyClient, PersonClient personClient) {
+        this.appointmentsClient = appointmentsClient;
         this.facultyClient = facultyClient;
         this.personClient = personClient;
     }
@@ -27,7 +27,7 @@ public class ArticleValidator {
     /**
      * implementation of the DevImplementation Interfaces. Must be replaced with actual interfaces for integration.
      */
-    private final AppointmentsService appointmentsService;
+    private final AppointmentsClient appointmentsClient;
     private final FacultyClient facultyClient;
     private final PersonClient personClient;
 
@@ -78,7 +78,7 @@ public class ArticleValidator {
     private boolean validateAppointmentId() {
         if (article.getAppointmentId() == 0) {
             return true;
-        } else return !appointmentsService.getAppointmentById(article.getAppointmentId()).equals(Optional.empty());
+        } else return !appointmentsClient.getAppointmentById(article.getAppointmentId()).equals(Optional.empty());
     }
 
     private boolean validateFacultyName() {

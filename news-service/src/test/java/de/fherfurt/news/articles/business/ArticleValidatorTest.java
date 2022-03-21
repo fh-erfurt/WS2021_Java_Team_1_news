@@ -1,7 +1,7 @@
 package de.fherfurt.news.articles.business;
 
-import de.fherfurt.appointments.client.AppointmentsService;
-import de.fherfurt.appointments.client.DevAppointmentsService;
+import de.fherfurt.appointments.client.AppointmentsClient;
+import de.fherfurt.appointments.client.DevAppointmentsClient;
 import de.fherfurt.faculties.client.DevFacultyClient;
 import de.fherfurt.faculties.client.FacultyClient;
 import de.fherfurt.news.articles.entity.Article;
@@ -21,11 +21,11 @@ import java.util.Set;
  */
 class ArticleValidatorTest {
 
-    AppointmentsService appointmentsService = new DevAppointmentsService();
+    AppointmentsClient appointmentsClient = new DevAppointmentsClient();
     FacultyClient facultyClient = new DevFacultyClient();
     PersonClient personClient = new DevPersonClient();
 
-    ArticleValidator validator = new ArticleValidator(appointmentsService, facultyClient, personClient);
+    ArticleValidator validator = new ArticleValidator(appointmentsClient, facultyClient, personClient);
 
     @Test
     void shouldReturnFalseEverythingEmpty() {
