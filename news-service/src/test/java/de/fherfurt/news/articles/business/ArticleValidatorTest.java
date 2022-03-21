@@ -20,7 +20,7 @@ class ArticleValidatorTest {
         ArticleValidator validator = new ArticleValidator();
         Article article = Article.builder().build();
 
-        Assertions.assertFalse(validator.validateArticle(article));
+        Assertions.assertTrue(validator.validateArticle(article));
     }
 
     @Test
