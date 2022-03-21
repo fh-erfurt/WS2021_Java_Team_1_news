@@ -11,10 +11,10 @@ import java.util.Optional;
 /**
  * not validated:
  * clicks, keywords, wasModified
- *
+ * <p>
  * Validates an article to make sure there is no wrong information like a non-existent author ur a publishing date in the future.
  *
- *  @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
+ * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 public class ArticleValidator {
 
@@ -25,41 +25,41 @@ public class ArticleValidator {
      */
     private AppointmentsService appointmentsService = new DevAppointmentsService();
     private FacultiesService facultiesService = new DevFacultiesService();
-    private PersonsService personsService = new DevPersonsService();
+    private PersonClient personClient = new DevPersonClient();
 
-    public boolean validateArticle(Article article){
+    public boolean validateArticle(Article article) {
         this.article = article;
 
-        if(validateTitle() && validateContent() && validateResponsiblePersonIds() && validateAuthorId() && validateAppointmentId() && validateFacultyName() && validateDate() && validateLanguage() && validatePriority()){
-            return true;
-        }
-        return false;
+        return  (
+                validateTitle() &&
+                validateContent() &&
+                validateResponsiblePersonIds() &&
+                validateAuthorId() &&
+                validateAppointmentId() &&
+                validateFacultyName() &&
+                validateDate() &&
+                validateLanguage() &&
+                validatePriority()
+                );
     }
 
-    private boolean validateTitle(){
-        if(article.getTitle() == null){
-            return false;
-        }
-        return true;
+    private boolean validateTitle() {
+
+        return article.getTitle() != null;
     }
 
-    private boolean validateContent(){
-        if(article.getContent() == null){
-            return false;
-        }
-        return true;
+    private boolean validateContent() {
+        return article.getContent() != null;
     }
 
-    private boolean validateResponsiblePersonIds(){
-        if(article.getResponsiblePersonIds() == null){
+    private boolean validateResponsiblePersonIds() {
+        if (article.getResponsiblePersonIds() == null) {
             return true;
-        }
-        else if(article.getResponsiblePersonIds().isEmpty()){
+        } else if (article.getResponsiblePersonIds().isEmpty()) {
             return true;
-        }
-        else {
-            for ( int id : article.getResponsiblePersonIds()){
-                if(personsService.getPersonByID(id).equals(Optional.empty())){
+        } else {
+            for (int id : article.getResponsiblePersonIds()) {
+                if (personClient.getPersonByID(id).equals(Optional.empty())) {
                     return false;
                 }
             }
@@ -67,48 +67,31 @@ public class ArticleValidator {
         return true;
     }
 
-    private boolean validateAuthorId(){
-        if(personsService.getPersonByID(article.getAuthorId()).equals(Optional.empty())){
-            return false;
-        }
-        return true;
+    private boolean validateAuthorId() {
+        return !personClient.getPersonByID(article.getAuthorId()).equals(Optional.empty());
     }
 
-    private boolean validateAppointmentId(){
-        if(article.getAppointmentId() == 0){
+    private boolean validateAppointmentId() {
+        if (article.getAppointmentId() == 0) {
             return true;
-        }
-        else if(appointmentsService.getAppointmentById(article.getAppointmentId()).equals(Optional.empty())){
-            return false;
-        }
-        return true;
+        } else return !appointmentsService.getAppointmentById(article.getAppointmentId()).equals(Optional.empty());
     }
 
-    private boolean validateFacultyName(){
+    private boolean validateFacultyName() {
         return facultiesService.isFacultynameValid(article.getFacultyName());
     }
 
-    private boolean validateDate(){
-        if(article.getDate() == null){
+    private boolean validateDate() {
+        if (article.getDate() == null) {
             return false;
-        }
-        else if(article.getDate().isBefore(LocalDateTime.now()) || article.getDate().isEqual(LocalDateTime.now())){
-            return true;
-        }
-        return false;
+        } else return article.getDate().isBefore(LocalDateTime.now()) || article.getDate().isEqual(LocalDateTime.now());
     }
 
-    private boolean validateLanguage(){
-        if(article.getLanguage() == null){
-            return false;
-        }
-        return true;
+    private boolean validateLanguage() {
+        return article.getLanguage() != null;
     }
 
     private boolean validatePriority() {
-        if (article.getPriority() == null) {
-            return false;
-        }
-        return true;
+        return article.getPriority() != null;
     }
 }

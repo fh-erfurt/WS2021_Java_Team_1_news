@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
-public interface PersonsService {
+public interface PersonClient {
 
     Optional<NewsPerson> getPersonByID(int id);
 
