@@ -82,7 +82,7 @@ public class ArticleValidator {
     }
 
     private boolean validateFacultyName() {
-        return facultyClient.isFacultynameValid(article.getFacultyName());
+        return facultyClient.isFacultyNameValid(article.getFacultyName());
     }
 
     private boolean validateDate() {

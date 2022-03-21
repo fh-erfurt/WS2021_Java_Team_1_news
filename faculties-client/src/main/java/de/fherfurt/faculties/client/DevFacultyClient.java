@@ -4,12 +4,11 @@ import de.fherfurt.faculties.client.transfer.objects.NewsFaculty;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
-public class DevFacultiesService implements FacultiesService {
+public class DevFacultyClient implements FacultyClient {
 
     private final List<NewsFaculty> faculties = Arrays.asList(
             new NewsFaculty("faculty1"),
@@ -19,9 +18,9 @@ public class DevFacultiesService implements FacultiesService {
     );
 
     @Override
-    public boolean isFacultynameValid(String name){
-        for (int i=0; i < 4; i++){
-            if(faculties.get(i).getName().equals(name)){
+    public boolean isFacultyNameValid(String name) {
+        for (int i = 0; i < 4; i++) {
+            if (faculties.get(i).getName().equals(name)) {
                 return true;
             }
         }
