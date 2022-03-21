@@ -1,8 +1,13 @@
-# WS2021_Java_Team_1_news
+# WS2021 Java Team 1 Service 4 News
 
-## Teammitglieder:
-* Maximilian Röhr
+## team members:
+* Maximilian Röhr (team lead)
 * Christof Seelisch
 * Dennis Rinck
+#### former team members
 * (Elias Schrader)
 * (Max-Niklas Bottner)
+
+---
+## Description
+...
