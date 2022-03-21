@@ -1,46 +1,50 @@
 package de.fherfurt.news.articles.business;
 
+import de.fherfurt.appointments.client.AppointmentsService;
+import de.fherfurt.faculties.client.FacultyClient;
 import de.fherfurt.news.articles.entity.Article;
-import de.fherfurt.appointments.client.*;
-import de.fherfurt.faculties.client.*;
-import de.fherfurt.persons.client.*;
+import de.fherfurt.persons.client.PersonClient;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
- * not validated:
- * clicks, keywords, wasModified
- * <p>
  * Validates an article to make sure there is no wrong information like a non-existent author ur a publishing date in the future.
  *
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
+
 public class ArticleValidator {
 
     private Article article;
 
+    public ArticleValidator(AppointmentsService appointmentsService, FacultyClient facultyClient, PersonClient personClient) {
+        this.appointmentsService = appointmentsService;
+        this.facultyClient = facultyClient;
+        this.personClient = personClient;
+    }
+
     /**
      * implementation of the DevImplementation Interfaces. Must be replaced with actual interfaces for integration.
      */
-    private AppointmentsClient appointmentsClient = new DevAppointmentsClient();
-    private FacultiesService facultiesService = new DevFacultiesService();
-    private PersonClient personClient = new DevPersonClient();
+    private final AppointmentsService appointmentsService;
+    private final FacultyClient facultyClient;
+    private final PersonClient personClient;
 
     public boolean validateArticle(Article article) {
         this.article = article;
 
-        return  (
+        return (
                 validateTitle() &&
-                validateContent() &&
-                validateResponsiblePersonIds() &&
-                validateAuthorId() &&
-                validateAppointmentId() &&
-                validateFacultyName() &&
-                validateDate() &&
-                validateLanguage() &&
-                validatePriority()
-                );
+                        validateContent() &&
+                        validateResponsiblePersonIds() &&
+                        validateAuthorId() &&
+                        validateAppointmentId() &&
+                        validateFacultyName() &&
+                        validateDate() &&
+                        validateLanguage() &&
+                        validatePriority()
+        );
     }
 
     private boolean validateTitle() {
@@ -74,11 +78,11 @@ public class ArticleValidator {
     private boolean validateAppointmentId() {
         if (article.getAppointmentId() == 0) {
             return true;
-        } else return !appointmentsClient.getAppointmentById(article.getAppointmentId()).equals(Optional.empty());
+        } else return !appointmentsService.getAppointmentById(article.getAppointmentId()).equals(Optional.empty());
     }
 
     private boolean validateFacultyName() {
-        return facultiesService.isFacultynameValid(article.getFacultyName());
+        return facultyClient.isFacultyNameValid(article.getFacultyName());
     }
 
     private boolean validateDate() {
