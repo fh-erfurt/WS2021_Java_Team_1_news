@@ -1,7 +1,9 @@
 package de.fherfurt.news.articles.entity;
 
+
 import de.fherfurt.news.core.entity.Entry;
 import lombok.Builder;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,3 +60,4 @@ public class Article extends Entry {
         this.priority = priority;
     }
 }
+
