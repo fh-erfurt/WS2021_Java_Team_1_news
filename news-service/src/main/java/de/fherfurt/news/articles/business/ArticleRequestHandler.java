@@ -13,6 +13,7 @@ import de.fherfurt.news.core.persistance.Repository;
 import lombok.AllArgsConstructor;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -46,7 +47,7 @@ public class ArticleRequestHandler {
         //guard clause to return an empty list immediately
         if (allCurrentArticles.isEmpty()) return Collections.emptyList();
 
-        Set<Article> articles = Collections.emptySet();
+        Set<Article> articles = allCurrentArticles;
 
         //checks if it has to filter articles
         if (requestType == RequestType.FILTER_SORT) {
@@ -69,6 +70,8 @@ public class ArticleRequestHandler {
      * @return returns the sorted articles
      */
     private List<Article> sortArticles(SortSettings sortSettings, Set<Article> articles) {
-        return new ArticleSortModule(sortSettings, articles.stream().toList()).sort();
+        List<Article> articleList = new LinkedList<>(articles);
+
+        return new ArticleSortModule(sortSettings, articleList).sort();
     }
 }
