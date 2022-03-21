@@ -6,7 +6,7 @@ package de.fherfurt.news.articles.entity;
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
 public enum Priority {
-    NORMAL,
+    CRITICAL,
     HIGH,
-    CRITICAL
+    NORMAL
 }
