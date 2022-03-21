@@ -4,8 +4,7 @@
 * Maximilian Röhr
 * Christof Seelisch
 * Dennis Rinck
----
-### former team members
+#### former team members
 * (Elias Schrader)
 * (Max-Niklas Bottner)
 
