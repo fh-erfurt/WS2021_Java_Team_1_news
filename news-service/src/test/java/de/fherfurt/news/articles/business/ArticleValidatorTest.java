@@ -1,8 +1,14 @@
 package de.fherfurt.news.articles.business;
 
+import de.fherfurt.appointments.client.AppointmentsService;
+import de.fherfurt.appointments.client.DevAppointmentsService;
+import de.fherfurt.faculties.client.DevFacultyClient;
+import de.fherfurt.faculties.client.FacultyClient;
 import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.articles.entity.Language;
 import de.fherfurt.news.articles.entity.Priority;
+import de.fherfurt.persons.client.DevPersonClient;
+import de.fherfurt.persons.client.PersonClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,21 +17,25 @@ import java.time.Month;
 import java.util.Set;
 
 /**
- *  @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
+ * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 class ArticleValidatorTest {
 
+    AppointmentsService appointmentsService = new DevAppointmentsService();
+    FacultyClient facultyClient = new DevFacultyClient();
+    PersonClient personClient = new DevPersonClient();
+
+    ArticleValidator validator = new ArticleValidator(appointmentsService, facultyClient, personClient);
+
     @Test
-    void shouldReturnFalseEverythingEmpty(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseEverythingEmpty() {
         Article article = Article.builder().build();
 
-        Assertions.assertTrue(validator.validateArticle(article));
+        Assertions.assertFalse(validator.validateArticle(article));
     }
 
     @Test
-    void shouldReturnFalseEmptyTitle(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseEmptyTitle() {
         Article article = Article.builder()
                 .withContent("Example Content")
                 .withResponsiblePersonIds(Set.of(1, 2, 3))
@@ -42,8 +52,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseEmptyContent(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseEmptyContent() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withResponsiblePersonIds(Set.of(1, 2, 3))
@@ -59,8 +68,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseFalseResponsiblePersonIds(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseFalseResponsiblePersonIds() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -77,8 +85,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseFalseAuthorId(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseFalseAuthorId() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -95,8 +102,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseEmptyAuthorId(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseEmptyAuthorId() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -112,8 +118,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseFalseAppointmentId(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseFalseAppointmentId() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -130,8 +135,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseFalseFacultyName(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseFalseFacultyName() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -148,8 +152,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseEmptyFacultyName(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseEmptyFacultyName() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -165,8 +168,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseFalseDate(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseFalseDate() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -183,8 +185,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseEmptyDate(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseEmptyDate() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -200,8 +201,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseEmptyLanguage(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseEmptyLanguage() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -217,8 +217,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnFalseEmptyPriority(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnFalseEmptyPriority() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -234,8 +233,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnTrueEverythingCorrect(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnTrueEverythingCorrect() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -252,8 +250,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnTrueEmptyPersons(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnTrueEmptyPersons() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -269,8 +266,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnTrueEmptyAppointment(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnTrueEmptyAppointment() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
@@ -286,8 +282,7 @@ class ArticleValidatorTest {
     }
 
     @Test
-    void shouldReturnTrueDateLongAgo(){
-        ArticleValidator validator = new ArticleValidator();
+    void shouldReturnTrueDateLongAgo() {
         Article article = Article.builder()
                 .withTitle("Example Title")
                 .withContent("Example Content")
