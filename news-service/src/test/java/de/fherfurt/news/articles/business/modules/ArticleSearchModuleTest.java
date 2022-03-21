@@ -12,8 +12,6 @@ import java.util.Set;
 
 class ArticleSearchModuleTest {
 
-    private final String ai = "Angewandte Informatik";
-    private final String ge = "Gebäude und Energie Technik";
     private String searchTerm = "";
 
     Set<String> articleKeywords1 = new HashSet<>(Arrays.asList("Prüfungen", "Corona"));
