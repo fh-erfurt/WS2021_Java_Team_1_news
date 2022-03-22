@@ -16,9 +16,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 class ArticleSortModuleTest {
 
     private SortSettings sortSettings;
@@ -51,6 +48,42 @@ class ArticleSortModuleTest {
         article3.setClicks(1);
     }
 
+    /**
+     * this is a helper function to check the order of articles are correct
+     *
+     * @param expected articles which are expected
+     * @param actual   actual articles
+     * @return returns true if the order and the contents of the actual articles equals the expected ones
+     */
+    private boolean checkOrderOfArticlesWithEquals(List<Article> expected, List<Article> actual) {
+        if (actual.size() != expected.size()) return false;
+
+        for (int i = 0; i < actual.size(); i++) {
+            if (!actual.get(i).equals(expected.get(i))) return false;
+        }
+        return true;
+    }
+
+    @Test
+    void sortWithNewlyCreatedArticlesAndMatchingAttributes() {
+        this.sortSettings = new SortSettings(SortDirection.ASC, SortPriority.TITLE);
+
+        //is the exact same as article2 but will have another pointer
+        //this is how we check if the actual values are equal
+        Article testArticle = Article.builder()
+                .withTitle("Stundenplan")
+                .withDate(LocalDateTime.of(2021, Month.JUNE, 25, 13, 13))
+                .withPriority(Priority.NORMAL)
+                .build();
+
+        List<Article> expectedArticles = new LinkedList<>(Arrays.asList(article3, article1, testArticle));
+
+        List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, articles).sort();
+
+        Assertions.assertTrue(checkOrderOfArticlesWithEquals(expectedArticles,sortedArticles));
+
+    }
+
     @Test
     void sortByTitleAscending() {
         this.sortSettings = new SortSettings(SortDirection.ASC, SortPriority.TITLE);
@@ -58,7 +91,7 @@ class ArticleSortModuleTest {
         List<Article> expectedArticles = new LinkedList<>(Arrays.asList(article3, article1, article2));
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, articles).sort();
-        
+
         Assertions.assertEquals(expectedArticles, sortedArticles);
     }
 
