@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.time.LocalDateTime;
 
 /**
+ * Dev Implementation of the Appointments Client interface
+ *
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 public class DevAppointmentsClient implements AppointmentsClient {

@@ -18,18 +18,15 @@ public class ArticleValidator {
 
     private Article article;
 
+    private final AppointmentsClient appointmentsClient;
+    private final FacultyClient facultyClient;
+    private final PersonClient personClient;
+
     public ArticleValidator(AppointmentsClient appointmentsClient, FacultyClient facultyClient, PersonClient personClient) {
         this.appointmentsClient = appointmentsClient;
         this.facultyClient = facultyClient;
         this.personClient = personClient;
     }
-
-    /**
-     * implementation of the DevImplementation Interfaces. Must be replaced with actual interfaces for integration.
-     */
-    private final AppointmentsClient appointmentsClient;
-    private final FacultyClient facultyClient;
-    private final PersonClient personClient;
 
     public boolean validateArticle(Article article) {
         this.article = article;
@@ -48,7 +45,6 @@ public class ArticleValidator {
     }
 
     private boolean validateTitle() {
-
         return article.getTitle() != null;
     }
 

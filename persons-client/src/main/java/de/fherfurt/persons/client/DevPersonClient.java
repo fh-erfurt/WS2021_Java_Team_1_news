@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
+ * Dev Implementation of the Person Client interface
+ *
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 public class DevPersonClient implements PersonClient {

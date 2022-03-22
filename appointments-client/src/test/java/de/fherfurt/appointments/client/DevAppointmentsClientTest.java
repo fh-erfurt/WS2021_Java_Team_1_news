@@ -3,6 +3,9 @@ package de.fherfurt.appointments.client;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
+ */
 class DevAppointmentsClientTest {
 
     @Test

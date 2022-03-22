@@ -3,6 +3,9 @@ package de.fherfurt.faculties.client;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
+ */
 class DevFacultyClientTest {
 
     @Test

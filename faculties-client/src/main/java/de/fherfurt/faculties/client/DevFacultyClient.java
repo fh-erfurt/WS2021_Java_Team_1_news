@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Dev Implementation of the Faculty Client interface
+ *
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
  */
 public class DevFacultyClient implements FacultyClient {
