@@ -1,4 +1,4 @@
-package de.fherfurt.news;
+package de.fherfurt.news.client;
 
 public interface NewsRessource {
 }
