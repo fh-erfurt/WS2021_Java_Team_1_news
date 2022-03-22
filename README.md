@@ -10,4 +10,4 @@
 
 ---
 ## Description
-...
+Welcome to the git repository of the news service. This service provides functionality to save and delete news articles as well as to fetch news articles with a specific request.
