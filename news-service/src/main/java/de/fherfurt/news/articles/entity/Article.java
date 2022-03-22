@@ -3,7 +3,6 @@ package de.fherfurt.news.articles.entity;
 
 import de.fherfurt.news.core.entity.Entry;
 import lombok.Builder;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,17 +35,17 @@ public class Article extends Entry {
     Priority priority;
 
     @Builder(setterPrefix = "with")
-    public Article( int id,
-                    String title,
-                    String content,
-                    Set<Integer> responsiblePersonIds,
-                    int authorId,
-                    int appointmentId,
-                    String facultyName,
-                    Set<String> keywords,
-                    LocalDateTime date,
-                    Language language,
-                    Priority priority){
+    public Article(int id,
+                   String title,
+                   String content,
+                   Set<Integer> responsiblePersonIds,
+                   int authorId,
+                   int appointmentId,
+                   String facultyName,
+                   Set<String> keywords,
+                   LocalDateTime date,
+                   Language language,
+                   Priority priority) {
         super(id);
         this.title = title;
         this.content = content;
@@ -59,5 +58,28 @@ public class Article extends Entry {
         this.language = language;
         this.priority = priority;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || object.getClass() != this.getClass()) return false;
+
+        Article otherArticle = (Article) object;
+
+
+        //check all values if they are equal
+        return this.getId() == otherArticle.getId()
+                && this.title.equals(otherArticle.title) || (this.title == null && otherArticle.title == null)
+                && this.content.equals(otherArticle.content) || (this.content == null && otherArticle.content == null)
+                && this.responsiblePersonIds.equals(otherArticle.responsiblePersonIds)
+                && this.authorId == otherArticle.authorId
+                && this.appointmentId == otherArticle.appointmentId
+                && this.facultyName.equals(otherArticle.facultyName) || (this.facultyName == null && otherArticle.facultyName == null)
+                && this.keywords.equals(otherArticle.keywords) || (this.keywords == null && otherArticle.keywords == null)
+                && this.date.equals(otherArticle.date) || (this.date == null && otherArticle.date == null)
+                && this.language == otherArticle.language
+                && this.priority == otherArticle.priority;
+    }
+
+
 }
 
