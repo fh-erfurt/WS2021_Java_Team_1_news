@@ -63,7 +63,7 @@ public class ArticleValidator {
             return true;
         } else {
             for (int id : article.getResponsiblePersonIds()) {
-                if (personClient.getPersonByID(id).equals(Optional.empty())) {
+                if (personClient.findById(id).equals(Optional.empty())) {
                     return false;
                 }
             }
@@ -72,7 +72,7 @@ public class ArticleValidator {
     }
 
     private boolean validateAuthorId() {
-        return !personClient.getPersonByID(article.getAuthorId()).equals(Optional.empty());
+        return !personClient.findById(article.getAuthorId()).equals(Optional.empty());
     }
 
     private boolean validateAppointmentId() {

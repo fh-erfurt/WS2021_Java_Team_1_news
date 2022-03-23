@@ -1,7 +1,8 @@
 package de.fherfurt.persons.client;
 
-import de.fherfurt.persons.client.transfer.objects.NewsPerson;
+import de.fherfurt.persons.client.transfer.objects.PersonDto;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -9,7 +10,13 @@ import java.util.Optional;
  */
 public interface PersonClient {
 
-    Optional<NewsPerson> getPersonByID(int id);
+    Optional<PersonDto> findById(int id);
 
-    Optional<NewsPerson> getPersonByMail(String mail);
+    Optional<PersonDto> findByEmail(String email);
+
+    List<PersonDto> findByFaculty(int facultyId);
+
+    List<PersonDto> findByName(String name);
+
+    void deleteBy(int id);
 }
