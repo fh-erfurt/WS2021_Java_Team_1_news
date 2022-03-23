@@ -29,8 +29,8 @@ public class ArticleDto {
     private Set<String> keywords;
     private LocalDateTime date;
     private boolean wasModified;
-    LanguageDto language;
-    PriorityDto priority;
+    private LanguageDto language;
+    private PriorityDto priority;
 
     @Builder(setterPrefix = "with")
     public ArticleDto( int id,
@@ -65,5 +65,25 @@ public class ArticleDto {
         CRITICAL,
         HIGH,
         NORMAL
+    }
+
+    public boolean equals(Object object){
+        if (object == null || object.getClass() != this.getClass()) return false;
+
+        ArticleDto otherArticle = (ArticleDto) object;
+
+
+        //check all values if they are equal
+        return this.getId() == otherArticle.getId()
+                && this.title.equals(otherArticle.title) || (this.title == null && otherArticle.title == null)
+                && this.content.equals(otherArticle.content) || (this.content == null && otherArticle.content == null)
+                && this.responsiblePersons.equals(otherArticle.responsiblePersons)
+                && this.author == otherArticle.author
+                && this.appointment == otherArticle.appointment
+                && this.facultyName.equals(otherArticle.facultyName) || (this.facultyName == null && otherArticle.facultyName == null)
+                && this.keywords.equals(otherArticle.keywords) || (this.keywords == null && otherArticle.keywords == null)
+                && this.date.equals(otherArticle.date) || (this.date == null && otherArticle.date == null)
+                && this.language == otherArticle.language
+                && this.priority == otherArticle.priority;
     }
 }
