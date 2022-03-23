@@ -78,9 +78,9 @@ class NewsControllerTest {
             logger.log(Level.WARNING, e.getMessage());
         }
 
-        EntryNotFoundException e = Assertions.assertThrows(EntryNotFoundException.class, () -> newsController.repository.findBy(idToTest));
+        EntryNotFoundException e = Assertions.assertThrows(EntryNotFoundException.class, () -> newsController.getArticle(idToTest));
 
-        Assertions.assertEquals("Entry not found with the Id: " + idToTest, e.getMessage());
+        Assertions.assertEquals("Article not found: " + idToTest, e.getMessage());
     }
 
     @Test
