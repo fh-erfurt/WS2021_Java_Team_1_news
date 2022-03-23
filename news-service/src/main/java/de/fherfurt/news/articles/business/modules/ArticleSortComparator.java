@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 
 /**
+ * this class is used for defining how are articles should be compared
+ *
+ * it is used in the {@link ArticleSortModule}
+ *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
 @AllArgsConstructor

@@ -14,10 +14,18 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * this class tests the functionality of the dev implementation {@link ArticleRepository}
+ *
+ * @author Maximilian Roehr <maximilian.roehr@fh-erfurt.de>
+ */
 class ArticleRepositoryTest {
 
-    ArticleRepository articleRepository;
+    //logger to log errors to the console
     private final Logger logger = Logger.getLogger(this.getClass().getName());
+
+    //setting up some values which are used in the tests
+    ArticleRepository articleRepository;
 
     Article article1 = Article.builder()
             .withId(1)
@@ -42,6 +50,7 @@ class ArticleRepositoryTest {
         articleRepository = ArticleRepository.getInstance();
     }
 
+    //deleting all articles currently stored in the repository
     @AfterEach
     void tearDown() {
         for (Article article : articleRepository.fetchAll()) {

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Information of an article
+ * Data container to store attributes of an article
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */

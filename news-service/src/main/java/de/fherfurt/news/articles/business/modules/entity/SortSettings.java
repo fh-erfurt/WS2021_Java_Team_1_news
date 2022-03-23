@@ -7,8 +7,7 @@ import lombok.Data;
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
-public @Data
-class SortSettings {
+public @Data class SortSettings {
     public final SortDirection sortDirection;
     public final SortPriority sortPriority;
 }

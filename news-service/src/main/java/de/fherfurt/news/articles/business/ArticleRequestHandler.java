@@ -7,8 +7,8 @@ import de.fherfurt.news.articles.business.modules.ArticleSortModule;
 
 import de.fherfurt.news.articles.business.modules.entity.SortSettings;
 import de.fherfurt.news.articles.entity.Article;
-import de.fherfurt.news.articles.entity.PreviewRequest;
-import de.fherfurt.news.articles.entity.RequestType;
+import de.fherfurt.news.articles.business.modules.entity.PreviewRequest;
+import de.fherfurt.news.articles.business.modules.entity.RequestType;
 import de.fherfurt.news.core.persistance.Repository;
 import lombok.AllArgsConstructor;
 
@@ -24,7 +24,7 @@ import java.util.Set;
  * search (title and keywords), and
  * sort({@link SortSettings})
  * them with this class
- *
+ * <p>
  * all returned articles are always sorted, filtering and searching is optional
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
@@ -55,7 +55,7 @@ public class ArticleRequestHandler {
             articles = new ArticleFilterModule(request.facultyName, allCurrentArticles).filter();
         }
         //checks if it has to search through the filtered articles
-        else if (requestType == RequestType.FILTER_SEARCH_SORT){
+        else if (requestType == RequestType.FILTER_SEARCH_SORT) {
             //searching on filtered articles
             articles = new ArticleSearchModule(request.searchTerm, articles).search();
         }
@@ -66,7 +66,7 @@ public class ArticleRequestHandler {
      * little helper function to maintain readability
      *
      * @param sortSettings settings to sort after
-     * @param articles articles to be sorted
+     * @param articles     articles to be sorted
      * @return returns the sorted articles
      */
     private List<Article> sortArticles(SortSettings sortSettings, Set<Article> articles) {

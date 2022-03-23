@@ -16,8 +16,14 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * this class tests the functionality of the {@link ArticleSortModule}
+ *
+ * @author Maximilian Roehr <maximilian.roehr@fh-erfurt.de>
+ */
 class ArticleSortModuleTest {
 
+    //setting up some values which are used in the tests
     private SortSettings sortSettings;
 
     private final Article article1 = Article.builder()
@@ -80,7 +86,7 @@ class ArticleSortModuleTest {
 
         List<Article> sortedArticles = new ArticleSortModule(this.sortSettings, articles).sort();
 
-        Assertions.assertTrue(checkOrderOfArticlesWithEquals(expectedArticles,sortedArticles));
+        Assertions.assertTrue(checkOrderOfArticlesWithEquals(expectedArticles, sortedArticles));
 
     }
 

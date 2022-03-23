@@ -1,7 +1,7 @@
 package de.fherfurt.news.articles.entity;
 
 /**
- * priority of an Entry. is used for filters and sorts
+ * priority of an entry
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */

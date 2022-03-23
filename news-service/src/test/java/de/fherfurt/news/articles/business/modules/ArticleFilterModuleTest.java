@@ -9,8 +9,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * this class tests the functionality of the {@link ArticleFilterModule}
+ *
+ * @author Maximilian Roehr <maximilian.roehr@fh-erfurt.de>
+ */
 class ArticleFilterModuleTest {
 
+    //setting up some values which are used in the tests
     private final String ai = "Angewandte Informatik";
     private final String ge = "Gebäude und Energie Technik";
     private String facultyFilterName;
@@ -43,7 +49,7 @@ class ArticleFilterModuleTest {
 
         Set<Article> filteredArticles = new ArticleFilterModule(this.facultyFilterName, this.articles).filter();
 
-        Assertions.assertEquals(Collections.emptySet(),filteredArticles);
+        Assertions.assertEquals(Collections.emptySet(), filteredArticles);
 
     }
 }

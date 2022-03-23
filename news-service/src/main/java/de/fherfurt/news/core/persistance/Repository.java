@@ -6,7 +6,6 @@ import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 import java.util.Set;
 
 /**
- * TODO add comments
  * Basic API definition of the Repository which is used to communicate to the underlying database
  *
  * @param <TYPE> Generic type of entry

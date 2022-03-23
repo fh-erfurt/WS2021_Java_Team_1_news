@@ -9,15 +9,19 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * this class tests the functionality of the {@link ArticleSearchModule}
+ *
+ * @author Maximilian Roehr <maximilian.roehr@fh-erfurt.de>
+ */
 class ArticleSearchModuleTest {
 
+    //setting up some values which are used in the tests
     private String searchTerm = "";
 
     Set<String> articleKeywords1 = new HashSet<>(Arrays.asList("Prüfungen", "Corona"));
     Set<String> articleKeywords2 = new HashSet<>(Arrays.asList("4. Semester", "Corona"));
     Set<String> articleKeywords3 = new HashSet<>(Arrays.asList("Stundenplan", "4. Semester"));
-
 
     private final Article article1 = Article.builder()
             .withKeywords(articleKeywords1)

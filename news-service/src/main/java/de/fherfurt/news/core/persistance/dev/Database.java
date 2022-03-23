@@ -11,52 +11,51 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
+ * this database class is a dev implementation to imitate the behaviour of a really simple database
  *
  * @author Maximilian Roehr <maximilian.roehr@fh-erfurt.de>
  */
 public class Database {
 
     //using SortedMap because it's the dev implementation
-    @Getter SortedMap<Integer, Article> map = new TreeMap<>();
+    @Getter
+    SortedMap<Integer, Article> map = new TreeMap<>();
 
     /**
-     *
      * @param article Article which should be saved
      */
-    public void save(Article article){
+    public void save(Article article) {
         if (article == null) return;
-        if (map.containsKey(article.getId()) || article.getId() == 0){
+        if (map.containsKey(article.getId()) || article.getId() == 0) {
             article.setId(createNewId());
         }
-        map.put(article.getId(),article);
+        map.put(article.getId(), article);
     }
 
     protected int createNewId() {
-        if (map.size() == 0){
+        if (map.size() == 0) {
             return 1;
         }
-        return map.lastKey()+1;
+        return map.lastKey() + 1;
     }
 
     /**
-     *
      * @param id id of Entry which should be deleted
      * @throws EntryNotFoundException if entry is not found
      */
     public void delete(int id) throws EntryNotFoundException {
-        if(checkIfExists(id)){
+        if (checkIfExists(id)) {
             map.remove(id);
-        }
-        else throw new EntryNotFoundException("Entry not found with the Id: " + id);
+        } else throw new EntryNotFoundException("Entry not found with the Id: " + id);
     }
 
-    private boolean checkIfExists(int id){
+    private boolean checkIfExists(int id) {
         return map.containsKey(id);
     }
 
-    public Article findBy(int id) throws EntryNotFoundException{
+    public Article findBy(int id) throws EntryNotFoundException {
         if (map.get(id) == null) throw new EntryNotFoundException("Entry not found with the Id: " + id);
-        else{
+        else {
             return map.get(id);
         }
     }

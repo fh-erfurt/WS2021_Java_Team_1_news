@@ -4,9 +4,9 @@ import de.fherfurt.news.articles.business.modules.entity.SortDirection;
 import de.fherfurt.news.articles.business.modules.entity.SortPriority;
 import de.fherfurt.news.articles.business.modules.entity.SortSettings;
 import de.fherfurt.news.articles.entity.Article;
-import de.fherfurt.news.articles.entity.PreviewRequest;
+import de.fherfurt.news.articles.business.modules.entity.PreviewRequest;
 import de.fherfurt.news.articles.entity.Priority;
-import de.fherfurt.news.articles.entity.RequestType;
+import de.fherfurt.news.articles.business.modules.entity.RequestType;
 import de.fherfurt.news.core.persistance.Repository;
 import de.fherfurt.news.core.persistance.dev.ArticleRepository;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
@@ -25,11 +25,17 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * this class tests the functionality of the {@link ArticleRequestHandler}
+ *
+ * @author Maximilian Roehr <maximilian.roehr@fh-erfurt.de>
+ */
 class ArticleRequestHandlerTest {
 
-
+    //logger to log errors to the console
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
+    //setting up some values which are used in the tests
     private PreviewRequest request;
     private RequestType requestType;
 
@@ -66,6 +72,7 @@ class ArticleRequestHandlerTest {
 
     private final Repository<Article> articleRepository = new ArticleRepository();
 
+    //saving predefined articles into the repository
     @BeforeEach
     void setUp() {
         for (Article article : articles) {
@@ -73,6 +80,7 @@ class ArticleRequestHandlerTest {
         }
     }
 
+    //deleting all articles out of the repository
     @AfterEach
     void tearDown() {
         for (Article article : articleRepository.fetchAll()) {
@@ -93,9 +101,9 @@ class ArticleRequestHandlerTest {
 
         ArticleRequestHandler requestHandler = new ArticleRequestHandler(articleRepository);
 
-        List<Article> expectedArticles = new LinkedList<>(Arrays.asList(article3,article1,article2));
+        List<Article> expectedArticles = new LinkedList<>(Arrays.asList(article3, article1, article2));
 
-        List<Article> actualArticles = requestHandler.handleRequest(request,requestType);
+        List<Article> actualArticles = requestHandler.handleRequest(request, requestType);
 
         Assertions.assertEquals(expectedArticles, actualArticles);
     }
@@ -110,9 +118,9 @@ class ArticleRequestHandlerTest {
 
         ArticleRequestHandler requestHandler = new ArticleRequestHandler(articleRepository);
 
-        List<Article> expectedArticles = new LinkedList<>(Arrays.asList(article1,article2));
+        List<Article> expectedArticles = new LinkedList<>(Arrays.asList(article1, article2));
 
-        List<Article> actualArticles = requestHandler.handleRequest(request,requestType);
+        List<Article> actualArticles = requestHandler.handleRequest(request, requestType);
 
         Assertions.assertEquals(expectedArticles, actualArticles);
 
@@ -131,7 +139,7 @@ class ArticleRequestHandlerTest {
         List<Article> expectedArticles = new LinkedList<>();
         expectedArticles.add(article2);
 
-        List<Article> actualArticles = requestHandler.handleRequest(request,requestType);
+        List<Article> actualArticles = requestHandler.handleRequest(request, requestType);
 
         Assertions.assertEquals(expectedArticles, actualArticles);
     }

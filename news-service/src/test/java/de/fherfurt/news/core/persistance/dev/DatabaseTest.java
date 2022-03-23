@@ -13,15 +13,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * TODO add comments and edit predefined article content
+ * this class tests the functionality of the dev implementation {@link Database}
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
 class DatabaseTest {
 
-
-    private final Database database = new Database();
+    //logger to log errors to the console
     private final Logger logger = Logger.getLogger(this.getClass().getName());
+
+    //setting up some values which are used in the tests
+    private final Database database = new Database();
 
     Article article1 = Article.builder()
             .withId(1)
