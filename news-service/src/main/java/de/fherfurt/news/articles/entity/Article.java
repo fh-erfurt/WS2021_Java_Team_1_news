@@ -5,6 +5,7 @@ import de.fherfurt.news.core.entity.Entry;
 import lombok.Builder;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.awt.image.BufferedImage;
@@ -19,6 +20,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class Article extends Entry {
 
     private String title;
