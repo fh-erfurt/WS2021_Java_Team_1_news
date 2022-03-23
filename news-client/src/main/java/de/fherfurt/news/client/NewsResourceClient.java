@@ -16,5 +16,5 @@ public interface NewsResourceClient {
 
     List<ArticlePreviewDto> getArticlePreviews(PreviewRequest request, RequestType requestType);
 
-    ArticleDto getArticle(int id);
+    ArticleDto getArticle(int id) throws Exception;
 }
