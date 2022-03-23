@@ -20,11 +20,11 @@ public @Data class PreviewRequestClient {
         public final SortDirectionClient sortDirection;
         public final SortPriorityClient sortPriority;
     }
-    public enum SortDirection {
+    public enum SortDirectionClient {
         ASC,
         DESC
     }
-    public enum SortPriority {
+    public enum SortPriorityClient {
         TITLE,
         DATE,
         CLICKS,
