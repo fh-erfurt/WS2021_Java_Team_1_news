@@ -4,11 +4,14 @@ import de.fherfurt.appointments.client.transfer.objects.NewsAppointment;
 import de.fherfurt.news.articles.boundary.mapper.ArticleToArticlePreviewDtoMapper;
 import de.fherfurt.news.articles.boundary.mapper.ArticleToDtoMapper;
 import de.fherfurt.news.articles.boundary.mapper.DtoToArticleMapper;
+import de.fherfurt.news.articles.business.NewsController;
 import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.articles.entity.Language;
 import de.fherfurt.news.articles.entity.Priority;
 import de.fherfurt.news.client.dto.ArticleDto;
 import de.fherfurt.news.client.dto.ArticlePreviewDto;
+import de.fherfurt.news.core.persistance.dev.ArticleRepository;
+import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 import de.fherfurt.persons.client.transfer.objects.PersonDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -19,6 +22,7 @@ import org.modelmapper.ModelMapper;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +35,7 @@ class NewsResourceTest {
     NewsAppointment newsAppointmentDto = new NewsAppointment(1,"Termin",LocalDateTime.of(2022, Month.APRIL,1,12,1),"Webex");
 
     PersonDto personDto = PersonDto.builder()
-            .withId(8)
+            .withId(1)
             .withFirstname("Klaus")
             .withLastname("Heinrichsens")
             .build();
@@ -46,9 +50,9 @@ class NewsResourceTest {
             .withResponsiblePersons(Set.of(personDto))
             .withAuthor(personDto)
             .withAppointment(newsAppointmentDto)
-            .withFacultyName("Angewande Informatik")
+            .withFacultyName("faculty1")
             .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,7,20,15,0))
+            .withDate(LocalDateTime.of(2022,1,20,15,0))
             .withLanguage(ArticleDto.LanguageDto.DE)
             .withPriority(ArticleDto.PriorityDto.HIGH)
             .build();
@@ -57,12 +61,12 @@ class NewsResourceTest {
             .withId(5)
             .withTitle("Best Title")
             .withContent("Hello Content")
-            .withResponsiblePersonIds(Set.of(8))
-            .withAuthorId(8)
-            .withAppointmentId(89)
-            .withFacultyName("Angewande Informatik")
+            .withResponsiblePersonIds(Set.of(1))
+            .withAuthorId(1)
+            .withAppointmentId(1)
+            .withFacultyName("faculty1")
             .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,7,20,15,0))
+            .withDate(LocalDateTime.of(2022,1,20,15,0))
             .withLanguage(Language.DE)
             .withPriority(Priority.HIGH)
             .build();
@@ -71,7 +75,6 @@ class NewsResourceTest {
     void setUp() {
         responsiblePersons.add(personDto);
         articleDto.setResponsiblePersons(responsiblePersons);
-        newsAppointmentDto.setId(89);
     }
 
     @AfterEach
@@ -118,23 +121,6 @@ class NewsResourceTest {
         Assertions.assertTrue(article.equals(testArticle));
     }
 
-    @Test
-    void mapToArticlePreview(){
-        ArticleToArticlePreviewDtoMapper mapper = new ArticleToArticlePreviewDtoMapper();
-
-        ArticlePreviewDto expected = ArticlePreviewDto.builder()
-                .withId(5)
-                .withTitle("Best Title")
-                .withContent("Hello Content")
-                .withFacultyName("Angewande Informatik")
-                .withKeywords(Set.of("Anouncment","Computers"))
-                .withDate(LocalDateTime.of(2022,7,20,15,0))
-                .build();
-
-        ArticlePreviewDto previewDto = mapper.map(article);
-
-        Assertions.assertTrue(expected.equals(previewDto));
-    }
 
     @Test
     void mapArticleToArticleDto(){
@@ -167,16 +153,28 @@ class NewsResourceTest {
         logger.log(Level.INFO,expected.getDate() + " : "+ articleDto.getDate()+"");
         logger.log(Level.INFO,expected.getLanguage() + " : "+ articleDto.getLanguage()+"");
         logger.log(Level.INFO,expected.getPriority() + " : "+ articleDto.getPriority()+"");
-
-
     }
     @Test
-    void save() {
+    void save() throws EntryNotFoundException {
+        NewsResource newsResource = new NewsResource();
+        ArticleDto testArticle = articleDto;
 
+        newsResource.save(testArticle);
+
+        ArticleDto fetchedArticle = null;
+
+        try {
+            fetchedArticle = newsResource.getArticle(5);
+        } catch (EntryNotFoundException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+
+        Assertions.assertTrue(articleDto.equals(fetchedArticle));
     }
 
     @Test
     void delete() {
+
     }
 
     @Test
@@ -185,6 +183,7 @@ class NewsResourceTest {
 
     @Test
     void getArticle() {
+
     }
 
 }
