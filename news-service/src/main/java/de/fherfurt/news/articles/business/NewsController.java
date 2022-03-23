@@ -14,8 +14,12 @@ import de.fherfurt.persons.client.DevPersonClient;
 import de.fherfurt.persons.client.PersonClient;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NewsController {
+
+    Logger logger = Logger.getLogger(this.getClass().getName());
 
     Repository<Article> repository = new ArticleRepository();
 
@@ -30,6 +34,9 @@ public class NewsController {
     public void save(Article article){
         if (articleValidator.validateArticle(article)){
             repository.save(article);
+        }
+        else {
+            logger.log(Level.INFO,"Article invalid"+"");
         }
     }
 
