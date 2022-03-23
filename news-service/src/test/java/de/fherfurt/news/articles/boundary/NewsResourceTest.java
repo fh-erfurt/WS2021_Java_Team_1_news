@@ -1,7 +1,6 @@
 package de.fherfurt.news.articles.boundary;
 
 import de.fherfurt.appointments.client.transfer.objects.NewsAppointment;
-import de.fherfurt.news.articles.boundary.mapper.ArticleToArticlePreviewDtoMapper;
 import de.fherfurt.news.articles.boundary.mapper.ArticleToDtoMapper;
 import de.fherfurt.news.articles.boundary.mapper.DtoToArticleMapper;
 import de.fherfurt.news.articles.entity.*;
