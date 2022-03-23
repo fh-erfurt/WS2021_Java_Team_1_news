@@ -3,10 +3,7 @@ package de.fherfurt.persons.client;
 import de.fherfurt.persons.client.transfer.objects.PersonDto;
 import de.fherfurt.persons.client.transfer.objects.Salutation;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Christof Seelisch <christof.seelisch@fh-erfurt.de>
@@ -38,11 +35,13 @@ public class DevPersonClient implements PersonClient {
     @Override
     public List<PersonDto> findByFaculty(int facultyId){
         // Do nothing because this function is not needed.
+        return Collections.emptyList();
     }
 
     @Override
     public List<PersonDto> findByName(String name){
         // Do nothing because this function is not needed.
+        return Collections.emptyList();
     }
 
     @Override
