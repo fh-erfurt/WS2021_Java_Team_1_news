@@ -89,23 +89,7 @@ class NewsResourceTest {
 
         Set<Integer> test = articleDto.getResponsiblePersons().stream().map(PersonDto::getId).collect(Collectors.toSet());
         logger.log(Level.INFO,"Set of Responsible Persons: " + test );
-        //Set<Integer> personIds = new Has
-        //typeMap.addMappings(mapper -> mapper.using(new PersonConverter()).map(ArticleDto::getResponsiblePersons,Article::setResponsiblePersonIds));
 
-
-/*
-        logger.log(Level.INFO,articleDto.getId()+" : "+ testArticle.getId());
-        logger.log(Level.INFO,articleDto.getTitle()+"");
-        logger.log(Level.INFO,articleDto.getContent()+"");
-        logger.log(Level.INFO,"Set of Responsible Person Ids (testArticle): " +articleDto.getResponsiblePersons());
-        logger.log(Level.INFO,articleDto.getAuthor()+"");
-        logger.log(Level.INFO,articleDto.getAppointment()+"");
-        logger.log(Level.INFO,articleDto.getFacultyName()+"");
-        logger.log(Level.INFO,articleDto.getKeywords()+"");
-        logger.log(Level.INFO,articleDto.getDate()+"");
-        logger.log(Level.INFO,articleDto.getLanguage()+"");
-        logger.log(Level.INFO,articleDto.getPriority()+"");
-*/
         Article testArticle = mapper.map(articleDto);
         logger.log(Level.INFO,article.getId()+" : "+testArticle.getId()+"");
         logger.log(Level.INFO,article.getTitle() + " : "+ testArticle.getTitle()+"");
