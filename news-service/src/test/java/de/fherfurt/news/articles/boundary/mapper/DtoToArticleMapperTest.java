@@ -9,17 +9,13 @@ import de.fherfurt.persons.client.transfer.objects.PersonDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 class DtoToArticleMapperTest {
-
-    ModelMapper mapper = new ModelMapper();
 
     NewsAppointment newsAppointmentDto = new NewsAppointment(1, "Termin", LocalDateTime.of(2022, Month.APRIL, 1, 12, 1), "Webex");
 
