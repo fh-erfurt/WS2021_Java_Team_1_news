@@ -1,9 +1,7 @@
 package de.fherfurt.news.articles.boundary;
 
 import de.fherfurt.appointments.client.transfer.objects.NewsAppointment;
-import de.fherfurt.news.articles.boundary.mapper.ArticleToDtoMapper;
-import de.fherfurt.news.articles.boundary.mapper.DtoToArticleMapper;
-import de.fherfurt.news.articles.entity.*;
+import de.fherfurt.news.articles.business.errors.ArticleNotValidException;
 import de.fherfurt.news.client.dto.ArticleDto;
 import de.fherfurt.news.client.dto.ArticlePreviewDto;
 import de.fherfurt.news.client.options.PreviewRequestClient;
@@ -108,7 +106,11 @@ class NewsResourceTest {
     void save() throws EntryNotFoundException {
         ArticleDto testArticle = articleDto;
 
-        newsResource.save(testArticle);
+        try {
+            newsResource.save(testArticle);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
 
         ArticleDto fetchedArticle = null;
 
@@ -125,7 +127,11 @@ class NewsResourceTest {
     void delete() {
         int idToTest = 5;
 
-        newsResource.save(articleDto);
+        try {
+            newsResource.save(articleDto);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING,e.getMessage());
+        }
 
         try {
             newsResource.delete(idToTest);
@@ -144,8 +150,16 @@ class NewsResourceTest {
         PreviewRequestClient request = new PreviewRequestClient("", "", sortSettings);
         RequestTypeClient requestType = RequestTypeClient.SORT;
 
-        newsResource.save(articleDto);
-        newsResource.save(articleDto2);
+        try {
+            newsResource.save(articleDto);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING,e.getMessage());
+        }
+        try {
+            newsResource.save(articleDto2);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING,e.getMessage());
+        }
 
         List<ArticlePreviewDto> expectedArticles = new LinkedList<>(Arrays.asList(articlePreviewDto,articlePreviewDto2));
 
@@ -156,7 +170,12 @@ class NewsResourceTest {
 
     @Test
     void getArticle() {
-        newsResource.save(articleDto);
+
+        try {
+            newsResource.save(articleDto);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING,e.getMessage());
+        }
 
         ArticleDto fetchedArticle = null;
         ArticleDto fetchedArticleRepository = null;

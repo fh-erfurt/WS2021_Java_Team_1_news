@@ -1,5 +1,6 @@
 package de.fherfurt.news.articles.business;
 
+import de.fherfurt.news.articles.business.errors.ArticleNotValidException;
 import de.fherfurt.news.articles.business.modules.entity.SortDirection;
 import de.fherfurt.news.articles.business.modules.entity.SortPriority;
 import de.fherfurt.news.articles.business.modules.entity.SortSettings;
@@ -53,7 +54,11 @@ class NewsControllerTest {
     void save() {
         Article testArticle = article;
 
-        newsController.save(testArticle);
+        try {
+            newsController.save(testArticle);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING,e.getMessage());
+        }
 
         Article fetchedArticle = null;
 
@@ -70,7 +75,11 @@ class NewsControllerTest {
     void delete() {
         int idToTest = 5;
 
-        newsController.save(article);
+        try {
+            newsController.save(article);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING,e.getMessage());
+        }
 
         try {
             newsController.delete(idToTest);
@@ -89,8 +98,16 @@ class NewsControllerTest {
         PreviewRequest request = new PreviewRequest("", "", sortSettings);
         RequestType requestType = RequestType.SORT;
 
-        newsController.save(article);
-        newsController.save(article2);
+        try {
+            newsController.save(article);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING,e.getMessage());
+        }
+        try {
+            newsController.save(article2);
+        } catch (ArticleNotValidException e) {
+            logger.log(Level.WARNING,e.getMessage());
+        }
 
         List<Article> expectedArticles = new LinkedList<>(Arrays.asList(article,article2));
 

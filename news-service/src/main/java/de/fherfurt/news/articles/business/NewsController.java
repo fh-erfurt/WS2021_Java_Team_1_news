@@ -4,6 +4,7 @@ import de.fherfurt.appointments.client.AppointmentsClient;
 import de.fherfurt.appointments.client.DevAppointmentsClient;
 import de.fherfurt.faculties.client.DevFacultyClient;
 import de.fherfurt.faculties.client.FacultyClient;
+import de.fherfurt.news.articles.business.errors.ArticleNotValidException;
 import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.articles.entity.PreviewRequest;
 import de.fherfurt.news.articles.entity.RequestType;
@@ -31,12 +32,16 @@ public class NewsController {
 
     ArticleValidator articleValidator = new ArticleValidator(appointmentsClient, facultyClient, personClient);
 
-    public void save(Article article){
-        if (articleValidator.validateArticle(article)){
+    public void save(Article article) throws ArticleNotValidException {
+        if (articleValidator.validateArticle(article)) {
+            try {
+                if (repository.findBy(article.getId()) != null) {
+                    article.setWasModified(true);
+                }
+            } catch (EntryNotFoundException ignored){/*do nothing*/}
             repository.save(article);
-        }
-        else {
-            logger.log(Level.INFO,"Article invalid"+"");
+        } else {
+            throw new ArticleNotValidException("Article not valid");
         }
     }
 

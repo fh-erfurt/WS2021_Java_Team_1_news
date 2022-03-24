@@ -5,6 +5,7 @@ import de.fherfurt.news.articles.boundary.mapper.ArticleToDtoMapper;
 import de.fherfurt.news.articles.boundary.mapper.DtoToArticleMapper;
 import de.fherfurt.news.articles.boundary.mapper.SortSettingsConverter;
 import de.fherfurt.news.articles.business.NewsController;
+import de.fherfurt.news.articles.business.errors.ArticleNotValidException;
 import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.articles.entity.PreviewRequest;
 import de.fherfurt.news.client.NewsResourceClient;
@@ -24,7 +25,7 @@ public class NewsResource implements NewsResourceClient {
     private final NewsController controller = new NewsController();
 
     @Override
-    public void save(ArticleDto articleDto) {
+    public void save(ArticleDto articleDto) throws ArticleNotValidException {
         DtoToArticleMapper mapper = new DtoToArticleMapper();
         if (articleDto != null) {
             Article article = mapper.map(articleDto);
