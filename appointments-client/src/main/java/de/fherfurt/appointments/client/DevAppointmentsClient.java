@@ -23,9 +23,9 @@ public class DevAppointmentsClient implements AppointmentsClient {
     );
 
     @Override
-    public Optional<NewsAppointment> getAppointmentById(int id){
-        for (int i=0; i < 4; i++){
-            if(appointments.get(i).getId() == id){
+    public Optional<NewsAppointment> getAppointmentById(int id) {
+        for (int i = 0; i < 4; i++) {
+            if (appointments.get(i).getId() == id) {
                 return Optional.ofNullable(appointments.get(i));
             }
         }
@@ -33,7 +33,7 @@ public class DevAppointmentsClient implements AppointmentsClient {
     }
 
     @Override
-    public Optional<NewsAppointment> getAppointmentByName(String name){
-        return appointments.stream().filter(user -> Objects.equals(user.getTitle(), title)).findFirst();
+    public Optional<NewsAppointment> getAppointmentByName(String name) {
+        return appointments.stream().filter(user -> Objects.equals(user.getName(), name)).findFirst();
     }
 }

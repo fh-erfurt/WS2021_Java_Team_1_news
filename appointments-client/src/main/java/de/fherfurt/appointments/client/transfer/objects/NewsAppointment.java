@@ -15,13 +15,13 @@ import java.time.LocalDateTime;
 @Setter
 public class NewsAppointment {
     private int id;
-    private String title;
+    private String name;
     private LocalDateTime date;
     private String place;
 
-    public NewsAppointment(int id, String title, LocalDateTime date, String place){
+    public NewsAppointment(int id, String name, LocalDateTime date, String place){
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.date = date;
         this.place = place;
     }

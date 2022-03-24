@@ -12,7 +12,7 @@ class DevAppointmentsClientTest {
     void shouldReturnAppointment1() {
         //TODO replace with real implementation when going live
         DevAppointmentsClient devAppointmentsService = new DevAppointmentsClient();
-        Assertions.assertEquals("appointment1", devAppointmentsService.getAppointmentById(1).get().getTitle());
+        Assertions.assertEquals("appointment1", devAppointmentsService.getAppointmentById(1).get().getName());
     }
 
     @Test
