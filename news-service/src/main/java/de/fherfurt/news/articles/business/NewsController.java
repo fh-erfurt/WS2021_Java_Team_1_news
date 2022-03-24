@@ -20,15 +20,17 @@ import java.util.List;
 public class NewsController {
 
     private NewsController() {
+        //TODO replace all dev implementations with real implementations when going live
         repository = new ArticleRepository();
         appointmentsClient = new DevAppointmentsClient();
         facultyClient = new DevFacultyClient();
         personClient = new DevPersonClient();
-        articleValidator = new ArticleValidator(appointmentsClient,facultyClient,personClient);
+
+        articleValidator = new ArticleValidator(appointmentsClient, facultyClient, personClient);
     }
 
     public static NewsController getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new NewsController();
         }
         return instance;

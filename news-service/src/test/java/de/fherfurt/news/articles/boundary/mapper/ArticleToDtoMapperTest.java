@@ -41,7 +41,8 @@ class ArticleToDtoMapperTest {
 
     @Test
     void mapArticleToArticleDto() {
-        ArticleToDtoMapper mapper = new ArticleToDtoMapper(new DevPersonClient(),new DevAppointmentsClient());
+        //TODO replace with real implementation when going live
+        ArticleToDtoMapper mapper = new ArticleToDtoMapper(new DevPersonClient(), new DevAppointmentsClient());
 
         ArticleDto expected = ArticleDto.builder()
                 .withId(5)

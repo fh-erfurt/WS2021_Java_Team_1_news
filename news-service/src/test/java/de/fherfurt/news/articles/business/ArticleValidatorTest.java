@@ -21,6 +21,7 @@ import java.util.Set;
  */
 class ArticleValidatorTest {
 
+    //TODO replace all dev implementations with real implementations when going live
     AppointmentsClient appointmentsClient = new DevAppointmentsClient();
     FacultyClient facultyClient = new DevFacultyClient();
     PersonClient personClient = new DevPersonClient();

@@ -1,11 +1,9 @@
 package de.fherfurt.news.articles.boundary.mapper;
 
 import de.fherfurt.appointments.client.AppointmentsClient;
-import de.fherfurt.appointments.client.DevAppointmentsClient;
 import de.fherfurt.appointments.client.transfer.objects.NewsAppointment;
 import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.client.dto.ArticleDto;
-import de.fherfurt.persons.client.DevPersonClient;
 import de.fherfurt.persons.client.PersonClient;
 import de.fherfurt.persons.client.transfer.objects.PersonDto;
 import org.modelmapper.ModelMapper;
@@ -16,7 +14,6 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * TODO add comments maybe
  * this class maps an {@link Article} to a {@link ArticleDto}
  *
  * @author Dennis Rinck <dennis.rinck@fh-erfurt.de>
