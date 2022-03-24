@@ -7,7 +7,8 @@ import de.fherfurt.news.articles.boundary.mapper.SortSettingsConverter;
 import de.fherfurt.news.articles.business.NewsController;
 import de.fherfurt.news.articles.business.errors.ArticleNotValidException;
 import de.fherfurt.news.articles.entity.Article;
-import de.fherfurt.news.articles.entity.PreviewRequest;
+import de.fherfurt.news.articles.business.modules.entity.PreviewRequest;
+import de.fherfurt.news.articles.business.modules.entity.RequestType;
 import de.fherfurt.news.client.NewsResourceClient;
 import de.fherfurt.news.client.dto.ArticleDto;
 import de.fherfurt.news.client.dto.ArticlePreviewDto;
@@ -67,8 +68,8 @@ public class NewsResource implements NewsResourceClient {
     @Override
     public List<ArticlePreviewDto> getArticlePreviews(PreviewRequestClient request, RequestTypeClient requestType) {
 
-        de.fherfurt.news.articles.entity.PreviewRequest newRequest = getServicePreviewRequest(request);
-        de.fherfurt.news.articles.entity.RequestType newRequestType = getServiceRequestType(requestType);
+        PreviewRequest newRequest = getServicePreviewRequest(request);
+        RequestType newRequestType = getServiceRequestType(requestType);
 
         List<Article> articles = controller.getArticlePreviews(newRequest, newRequestType);
 
@@ -98,8 +99,8 @@ public class NewsResource implements NewsResourceClient {
      * @param request client side: PreviewRequest
      * @return service side: PreviewRequest
      */
-    private de.fherfurt.news.articles.entity.PreviewRequest getServicePreviewRequest(PreviewRequestClient request) {
-        TypeMap<PreviewRequestClient, de.fherfurt.news.articles.entity.PreviewRequest> requestMapper = new ModelMapper().createTypeMap(PreviewRequestClient.class, PreviewRequest.class);
+    private PreviewRequest getServicePreviewRequest(PreviewRequestClient request) {
+        TypeMap<PreviewRequestClient, PreviewRequest> requestMapper = new ModelMapper().createTypeMap(PreviewRequestClient.class, PreviewRequest.class);
         requestMapper.addMappings(mapper -> mapper.using(new SortSettingsConverter()).map(PreviewRequestClient::getSortSettings, PreviewRequest::setSortSettings));
         return requestMapper.map(request);
     }
@@ -110,8 +111,8 @@ public class NewsResource implements NewsResourceClient {
      * @param requestType client side: RequestType
      * @return service side: RequestType
      */
-    private de.fherfurt.news.articles.entity.RequestType getServiceRequestType(RequestTypeClient requestType) {
-        TypeMap<RequestTypeClient, de.fherfurt.news.articles.entity.RequestType> requestTypeMapper = new ModelMapper().createTypeMap(RequestTypeClient.class, de.fherfurt.news.articles.entity.RequestType.class);
+    private RequestType getServiceRequestType(RequestTypeClient requestType) {
+        TypeMap<RequestTypeClient, RequestType> requestTypeMapper = new ModelMapper().createTypeMap(RequestTypeClient.class, RequestType.class);
         return requestTypeMapper.map(requestType);
     }
 
