@@ -33,7 +33,7 @@ public class DevAppointmentsClient implements AppointmentsClient {
     }
 
     @Override
-    public Optional<NewsAppointment> getAppointmentByName(String title){
+    public Optional<NewsAppointment> getAppointmentByName(String name){
         return appointments.stream().filter(user -> Objects.equals(user.getTitle(), title)).findFirst();
     }
 }
