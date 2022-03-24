@@ -28,6 +28,11 @@ public class ArticleValidator {
         this.personClient = personClient;
     }
 
+    /**
+     * validates an article by checking it for correct attributes
+     *
+     * @param article
+     */
     public boolean validateArticle(Article article) {
         this.article = article;
 
@@ -44,6 +49,10 @@ public class ArticleValidator {
         );
     }
 
+
+    /**
+     * the following functions each check one attribute for validity
+     */
     private boolean validateTitle() {
         return article.getTitle() != null;
     }
