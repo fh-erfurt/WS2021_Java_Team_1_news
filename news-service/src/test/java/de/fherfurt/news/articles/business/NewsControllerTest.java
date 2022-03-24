@@ -4,7 +4,11 @@ import de.fherfurt.news.articles.business.errors.ArticleNotValidException;
 import de.fherfurt.news.articles.business.modules.entity.SortDirection;
 import de.fherfurt.news.articles.business.modules.entity.SortPriority;
 import de.fherfurt.news.articles.business.modules.entity.SortSettings;
-import de.fherfurt.news.articles.entity.*;
+import de.fherfurt.news.articles.entity.Article;
+import de.fherfurt.news.articles.entity.Language;
+import de.fherfurt.news.articles.entity.PreviewRequest;
+import de.fherfurt.news.articles.entity.Priority;
+import de.fherfurt.news.articles.entity.RequestType;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,7 +34,7 @@ class NewsControllerTest {
             .withAuthorId(1)
             .withAppointmentId(1)
             .withFacultyName("faculty1")
-            .withKeywords(Set.of("Anouncment","Computers"))
+            .withKeywords(Set.of("Announcement","Computers"))
             .withDate(LocalDateTime.of(2022,1,20,15,0))
             .withLanguage(Language.DE)
             .withPriority(Priority.HIGH)
@@ -44,7 +48,7 @@ class NewsControllerTest {
             .withAuthorId(1)
             .withAppointmentId(1)
             .withFacultyName("faculty2")
-            .withKeywords(Set.of("Anouncment","Computers"))
+            .withKeywords(Set.of("Announcement","Computers"))
             .withDate(LocalDateTime.of(2022,2,20,15,0))
             .withLanguage(Language.DE)
             .withPriority(Priority.HIGH)
@@ -122,7 +126,6 @@ class NewsControllerTest {
         newsController.repository.save(article);
 
         Article fetchedArticle = null;
-        Article fetchedArticleRepository = null;
 
         try {
             fetchedArticle = newsController.getArticle(5);
@@ -130,12 +133,6 @@ class NewsControllerTest {
             logger.log(Level.WARNING, e.getMessage());
         }
 
-        try {
-            fetchedArticleRepository = newsController.repository.findBy(5);
-        } catch (EntryNotFoundException e) {
-            logger.log(Level.WARNING, e.getMessage());
-        }
-
-        Assertions.assertEquals(fetchedArticleRepository, fetchedArticle);
+        Assertions.assertEquals(article, fetchedArticle);
     }
 }

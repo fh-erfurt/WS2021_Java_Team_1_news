@@ -12,6 +12,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * this is the article object which contains objects like {@link PersonDto} and {@link NewsAppointment}
+ * this class should be used in the client side
+ *
+ * @author Dennis Rinck <dennis.rinck@fh-erfurt.de>
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,17 +39,17 @@ public class ArticleDto {
     private PriorityDto priority;
 
     @Builder(setterPrefix = "with")
-    public ArticleDto( int id,
-                    String title,
-                    String content,
-                    Set<PersonDto> responsiblePersons,
-                    PersonDto author,
-                    NewsAppointment appointment,
-                    String facultyName,
-                    Set<String> keywords,
-                    LocalDateTime date,
-                    LanguageDto language,
-                    PriorityDto priority){
+    public ArticleDto(int id,
+                      String title,
+                      String content,
+                      Set<PersonDto> responsiblePersons,
+                      PersonDto author,
+                      NewsAppointment appointment,
+                      String facultyName,
+                      Set<String> keywords,
+                      LocalDateTime date,
+                      LanguageDto language,
+                      PriorityDto priority) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -57,17 +63,17 @@ public class ArticleDto {
         this.priority = priority;
     }
 
-    public enum LanguageDto{
-        DE,EN
+    public enum LanguageDto {
+        DE, EN
     }
 
-    public enum PriorityDto{
+    public enum PriorityDto {
         CRITICAL,
         HIGH,
         NORMAL
     }
 
-    public boolean equals(Object object){
+    public boolean equals(Object object) {
         if (object == null || object.getClass() != this.getClass()) return false;
 
         ArticleDto otherArticle = (ArticleDto) object;

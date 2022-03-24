@@ -15,12 +15,9 @@ import de.fherfurt.persons.client.DevPersonClient;
 import de.fherfurt.persons.client.PersonClient;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class NewsController {
-
-    Logger logger = Logger.getLogger(this.getClass().getName());
 
     Repository<Article> repository = new ArticleRepository();
 
@@ -53,15 +50,15 @@ public class NewsController {
         }
     }
 
-    public List<Article> getArticlePreviews(PreviewRequest request, RequestType requestType){
-        return new ArticleRequestHandler(repository).handleRequest(request,requestType);
+    public List<Article> getArticlePreviews(PreviewRequest request, RequestType requestType) {
+        return new ArticleRequestHandler(repository).handleRequest(request, requestType);
     }
 
     public Article getArticle(int id) throws EntryNotFoundException {
-        try{
+        try {
             return repository.findBy(id);
-        }catch(EntryNotFoundException e){
-            throw new EntryNotFoundException("Article not found: "+id);
+        } catch (EntryNotFoundException e) {
+            throw new EntryNotFoundException("Article not found: " + id);
         }
     }
 }

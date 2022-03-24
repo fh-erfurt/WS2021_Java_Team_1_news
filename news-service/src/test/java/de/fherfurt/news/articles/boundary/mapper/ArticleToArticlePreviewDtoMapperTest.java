@@ -21,8 +21,8 @@ class ArticleToArticlePreviewDtoMapperTest {
             .withResponsiblePersonIds(Set.of(8))
             .withAuthorId(8)
             .withAppointmentId(89)
-            .withFacultyName("Angewande Informatik")
-            .withKeywords(Set.of("Anouncment","Computers"))
+            .withFacultyName("Angewandte Informatik")
+            .withKeywords(Set.of("Announcement","Computers"))
             .withDate(LocalDateTime.of(2022,7,20,15,0))
             .withLanguage(Language.DE)
             .withPriority(Priority.HIGH)
@@ -35,14 +35,13 @@ class ArticleToArticlePreviewDtoMapperTest {
         ArticlePreviewDto expected = ArticlePreviewDto.builder()
                 .withId(5)
                 .withTitle("Best Title")
-                .withContent("Hello Content")
-                .withFacultyName("Angewande Informatik")
-                .withKeywords(Set.of("Anouncment","Computers"))
+                .withFacultyName("Angewandte Informatik")
+                .withKeywords(Set.of("Announcement","Computers"))
                 .withDate(LocalDateTime.of(2022,7,20,15,0))
                 .build();
 
         ArticlePreviewDto previewDto = mapper.map(article);
 
-        Assertions.assertTrue(expected.equals(previewDto));
+        Assertions.assertEquals(expected, previewDto);
     }
 }

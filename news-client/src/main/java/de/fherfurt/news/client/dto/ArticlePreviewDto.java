@@ -8,6 +8,11 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+/**
+ * this class is used to store relevant information for displaying a preview
+ *
+ * @author Dennis Rinck <dennis.rinck@fh-erfurt.de>
+ */
 @Setter
 @Getter
 @NoArgsConstructor
@@ -22,12 +27,11 @@ public class ArticlePreviewDto {
     private boolean wasModified;
 
     @Builder(setterPrefix = "with")
-    public ArticlePreviewDto( int id,
-                       String title,
-                       String content,
-                       String facultyName,
-                       Set<String> keywords,
-                       LocalDateTime date){
+    public ArticlePreviewDto(int id,
+                             String title,
+                             String facultyName,
+                             Set<String> keywords,
+                             LocalDateTime date) {
         this.id = id;
         this.title = title;
         this.facultyName = facultyName;
@@ -37,7 +41,7 @@ public class ArticlePreviewDto {
     }
 
     @Override
-    public boolean equals(Object object){
+    public boolean equals(Object object) {
         if (object == null || object.getClass() != this.getClass()) return false;
 
         ArticlePreviewDto otherArticle = (ArticlePreviewDto) object;

@@ -11,24 +11,17 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleToDtoMapperTest {
 
-    NewsAppointment newsAppointmentDto = new NewsAppointment(1,"Termin",LocalDateTime.of(2022, Month.APRIL,1,12,1),"Webex");
+    NewsAppointment newsAppointmentDto = new NewsAppointment(1, "Termin", LocalDateTime.of(2022, Month.APRIL, 1, 12, 1), "Webex");
 
     PersonDto personDto = PersonDto.builder()
             .withId(8)
             .withFirstname("Klaus")
             .withLastname("Heinrichsens")
             .build();
-
-    Set<PersonDto> responsiblePersons = new HashSet<>();
 
     Article article = Article.builder()
             .withId(5)
@@ -37,12 +30,13 @@ class ArticleToDtoMapperTest {
             .withResponsiblePersonIds(Set.of(8))
             .withAuthorId(8)
             .withAppointmentId(89)
-            .withFacultyName("Angewande Informatik")
-            .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,7,20,15,0))
+            .withFacultyName("Angewandte Informatik")
+            .withKeywords(Set.of("Announcement", "Computers"))
+            .withDate(LocalDateTime.of(2022, 7, 20, 15, 0))
             .withLanguage(Language.DE)
             .withPriority(Priority.HIGH)
             .build();
+
     @Test
     void mapArticleToArticleDto() {
         ArticleToDtoMapper mapper = new ArticleToDtoMapper();
@@ -54,8 +48,8 @@ class ArticleToDtoMapperTest {
                 .withResponsiblePersons(Set.of(personDto))
                 .withAuthor(personDto)
                 .withAppointment(newsAppointmentDto)
-                .withFacultyName("Angewande Informatik")
-                .withKeywords(Set.of("Anouncment", "Computers"))
+                .withFacultyName("Angewandte Informatik")
+                .withKeywords(Set.of("Announcement", "Computers"))
                 .withDate(LocalDateTime.of(2022, 7, 20, 15, 0))
                 .withLanguage(ArticleDto.LanguageDto.DE)
                 .withPriority(ArticleDto.PriorityDto.HIGH)
@@ -63,9 +57,7 @@ class ArticleToDtoMapperTest {
 
         ArticleDto articleDto = mapper.map(article);
 
-        Assertions.assertTrue(expected.equals(articleDto));
-
-
+        Assertions.assertEquals(expected, articleDto);
 
 
     }

@@ -8,26 +8,27 @@ import de.fherfurt.news.client.options.PreviewRequestClient;
 import de.fherfurt.news.client.options.RequestTypeClient;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 import de.fherfurt.persons.client.transfer.objects.PersonDto;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 class NewsResourceTest {
+
     Logger logger = Logger.getLogger(this.getClass().getName());
-    ModelMapper mapper = new ModelMapper();
 
     NewsResource newsResource = new NewsResource();
 
-    NewsAppointment newsAppointmentDto = new NewsAppointment(1,"Termin",LocalDateTime.of(2022, Month.APRIL,1,12,1),"Webex");
+    NewsAppointment newsAppointmentDto = new NewsAppointment(1, "Termin", LocalDateTime.of(2022, Month.APRIL, 1, 12, 1), "Webex");
 
     PersonDto personDto = PersonDto.builder()
             .withId(1)
@@ -37,7 +38,6 @@ class NewsResourceTest {
 
     Set<PersonDto> responsiblePersons = new HashSet<>();
 
-
     ArticleDto articleDto = ArticleDto.builder()
             .withId(5)
             .withTitle("Best Title")
@@ -46,8 +46,8 @@ class NewsResourceTest {
             .withAuthor(personDto)
             .withAppointment(newsAppointmentDto)
             .withFacultyName("faculty1")
-            .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,1,20,15,0))
+            .withKeywords(Set.of("Announcement", "Computers"))
+            .withDate(LocalDateTime.of(2022, 1, 20, 15, 0))
             .withLanguage(ArticleDto.LanguageDto.DE)
             .withPriority(ArticleDto.PriorityDto.HIGH)
             .build();
@@ -60,8 +60,8 @@ class NewsResourceTest {
             .withAuthor(personDto)
             .withAppointment(newsAppointmentDto)
             .withFacultyName("faculty2")
-            .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,2,20,15,0))
+            .withKeywords(Set.of("Announcement", "Computers"))
+            .withDate(LocalDateTime.of(2022, 2, 20, 15, 0))
             .withLanguage(ArticleDto.LanguageDto.DE)
             .withPriority(ArticleDto.PriorityDto.HIGH)
             .build();
@@ -70,30 +70,16 @@ class NewsResourceTest {
             .withId(5)
             .withTitle("Best Title")
             .withFacultyName("faculty1")
-            .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,1,20,15,0))
+            .withKeywords(Set.of("Announcement", "Computers"))
+            .withDate(LocalDateTime.of(2022, 1, 20, 15, 0))
             .build();
 
     ArticlePreviewDto articlePreviewDto2 = ArticlePreviewDto.builder()
             .withId(4)
             .withTitle("Best Title 2")
             .withFacultyName("faculty2")
-            .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,2,20,15,0))
-            .build();
-
-    Article article = Article.builder()
-            .withId(5)
-            .withTitle("Best Title")
-            .withContent("Hello Content")
-            .withResponsiblePersonIds(Set.of(1))
-            .withAuthorId(1)
-            .withAppointmentId(1)
-            .withFacultyName("faculty1")
-            .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,1,20,15,0))
-            .withLanguage(Language.DE)
-            .withPriority(Priority.HIGH)
+            .withKeywords(Set.of("Announcement", "Computers"))
+            .withDate(LocalDateTime.of(2022, 2, 20, 15, 0))
             .build();
 
     @BeforeEach
@@ -103,7 +89,7 @@ class NewsResourceTest {
     }
 
     @Test
-    void save() throws EntryNotFoundException {
+    void save() {
         ArticleDto testArticle = articleDto;
 
         try {
@@ -120,7 +106,7 @@ class NewsResourceTest {
             logger.log(Level.WARNING, e.getMessage());
         }
 
-        Assertions.assertTrue(articleDto.equals(fetchedArticle));
+        Assertions.assertEquals(articleDto, fetchedArticle);
     }
 
     @Test
@@ -161,7 +147,7 @@ class NewsResourceTest {
             logger.log(Level.WARNING,e.getMessage());
         }
 
-        List<ArticlePreviewDto> expectedArticles = new LinkedList<>(Arrays.asList(articlePreviewDto,articlePreviewDto2));
+        List<ArticlePreviewDto> expectedArticles = new LinkedList<>(Arrays.asList(articlePreviewDto, articlePreviewDto2));
 
         List<ArticlePreviewDto> actualArticles = newsResource.getArticlePreviews(request, requestType);
 
@@ -178,7 +164,6 @@ class NewsResourceTest {
         }
 
         ArticleDto fetchedArticle = null;
-        ArticleDto fetchedArticleRepository = null;
 
         try {
             fetchedArticle = newsResource.getArticle(5);
@@ -186,13 +171,7 @@ class NewsResourceTest {
             logger.log(Level.WARNING, e.getMessage());
         }
 
-        try {
-            fetchedArticleRepository = newsResource.getArticle(5);
-        } catch (EntryNotFoundException e) {
-            logger.log(Level.WARNING, e.getMessage());
-        }
-
-        Assertions.assertEquals(fetchedArticleRepository, fetchedArticle);
+        Assertions.assertEquals(articleDto, fetchedArticle);
     }
 
 }

@@ -17,13 +17,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DtoToArticleMapperTest {
 
     ModelMapper mapper = new ModelMapper();
 
-    NewsAppointment newsAppointmentDto = new NewsAppointment(1,"Termin",LocalDateTime.of(2022, Month.APRIL,1,12,1),"Webex");
+    NewsAppointment newsAppointmentDto = new NewsAppointment(1, "Termin", LocalDateTime.of(2022, Month.APRIL, 1, 12, 1), "Webex");
 
     PersonDto personDto = PersonDto.builder()
             .withId(8)
@@ -41,9 +39,9 @@ class DtoToArticleMapperTest {
             .withResponsiblePersons(Set.of(personDto))
             .withAuthor(personDto)
             .withAppointment(newsAppointmentDto)
-            .withFacultyName("Angewande Informatik")
-            .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,7,20,15,0))
+            .withFacultyName("Angewandte Informatik")
+            .withKeywords(Set.of("Announcement", "Computers"))
+            .withDate(LocalDateTime.of(2022, 7, 20, 15, 0))
             .withLanguage(ArticleDto.LanguageDto.DE)
             .withPriority(ArticleDto.PriorityDto.HIGH)
             .build();
@@ -54,10 +52,10 @@ class DtoToArticleMapperTest {
             .withContent("Hello Content")
             .withResponsiblePersonIds(Set.of(8))
             .withAuthorId(8)
-            .withAppointmentId(89)
-            .withFacultyName("Angewande Informatik")
-            .withKeywords(Set.of("Anouncment","Computers"))
-            .withDate(LocalDateTime.of(2022,7,20,15,0))
+            .withAppointmentId(1)
+            .withFacultyName("Angewandte Informatik")
+            .withKeywords(Set.of("Announcement", "Computers"))
+            .withDate(LocalDateTime.of(2022, 7, 20, 15, 0))
             .withLanguage(Language.DE)
             .withPriority(Priority.HIGH)
             .build();
@@ -66,17 +64,14 @@ class DtoToArticleMapperTest {
     void setUp() {
         responsiblePersons.add(personDto);
         articleDto.setResponsiblePersons(responsiblePersons);
-        newsAppointmentDto.setId(89);
     }
 
     @Test
     void mapToArticle() {
         DtoToArticleMapper mapper = new DtoToArticleMapper();
-        Set<Integer> test = articleDto.getResponsiblePersons().stream().map(PersonDto::getId).collect(Collectors.toSet());
-
 
         Article testArticle = mapper.map(articleDto);
 
-        Assertions.assertTrue(article.equals(testArticle));
+        Assertions.assertEquals(article, testArticle);
     }
 }
