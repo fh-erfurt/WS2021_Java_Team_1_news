@@ -13,5 +13,5 @@ public interface AppointmentsClient {
 
     Optional<NewsAppointment> getAppointmentById(int id);
 
-    Optional<NewsAppointment> getAppointmentByName(String title);
+    Optional<NewsAppointment> getAppointmentByName(String name);
 }
