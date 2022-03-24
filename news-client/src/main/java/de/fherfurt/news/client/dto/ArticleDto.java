@@ -1,9 +1,8 @@
-package de.fherfurt.news.articles.entity;
+package de.fherfurt.news.client.dto;
 
-
-import de.fherfurt.news.core.entity.Entry;
+import de.fherfurt.appointments.client.transfer.objects.NewsAppointment;
+import de.fherfurt.persons.client.transfer.objects.PersonDto;
 import lombok.Builder;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,47 +13,49 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Information of an article
+ * this is the article object which contains objects like {@link PersonDto} and {@link NewsAppointment}
+ * this class should be used in the client side
  *
- * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
+ * @author Dennis Rinck <dennis.rinck@fh-erfurt.de>
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class Article extends Entry {
+public class ArticleDto {
 
+    private int id;
     private String title;
     private String content;
-    private Set<Integer> responsiblePersonIds;
+    private Set<PersonDto> responsiblePersons;
     private List<BufferedImage> imageList;
-    private int authorId;
-    private int appointmentId;
+    private PersonDto author;
+    private NewsAppointment appointment;
     private int clicks;
     private String facultyName;
     private Set<String> keywords;
     private LocalDateTime date;
     private boolean wasModified;
-    Language language;
-    Priority priority;
+    private LanguageDto language;
+    private PriorityDto priority;
 
     @Builder(setterPrefix = "with")
-    public Article( int id,
-                    String title,
-                    String content,
-                    Set<Integer> responsiblePersonIds,
-                    int authorId,
-                    int appointmentId,
-                    String facultyName,
-                    Set<String> keywords,
-                    LocalDateTime date,
-                    Language language,
-                    Priority priority){
-        super(id);
+    public ArticleDto(int id,
+                      String title,
+                      String content,
+                      Set<PersonDto> responsiblePersons,
+                      PersonDto author,
+                      NewsAppointment appointment,
+                      String facultyName,
+                      Set<String> keywords,
+                      LocalDateTime date,
+                      LanguageDto language,
+                      PriorityDto priority) {
+        this.id = id;
         this.title = title;
         this.content = content;
-        this.responsiblePersonIds = responsiblePersonIds;
-        this.authorId = authorId;
-        this.appointmentId = appointmentId;
+        this.responsiblePersons = responsiblePersons;
+        this.author = author;
+        this.appointment = appointment;
         this.facultyName = facultyName;
         this.keywords = keywords;
         this.date = date;
@@ -62,26 +63,33 @@ public class Article extends Entry {
         this.priority = priority;
     }
 
-    @Override
+    public enum LanguageDto {
+        DE, EN
+    }
+
+    public enum PriorityDto {
+        CRITICAL,
+        HIGH,
+        NORMAL
+    }
+
     public boolean equals(Object object) {
         if (object == null || object.getClass() != this.getClass()) return false;
 
-        Article otherArticle = (Article) object;
+        ArticleDto otherArticle = (ArticleDto) object;
 
 
         //check all values if they are equal
         return this.getId() == otherArticle.getId()
                 && this.title.equals(otherArticle.title) || (this.title == null && otherArticle.title == null)
                 && this.content.equals(otherArticle.content) || (this.content == null && otherArticle.content == null)
-                && this.responsiblePersonIds.equals(otherArticle.responsiblePersonIds)
-                && this.authorId == otherArticle.authorId
-                && this.appointmentId == otherArticle.appointmentId
+                && this.responsiblePersons.equals(otherArticle.responsiblePersons)
+                && this.author == otherArticle.author
+                && this.appointment == otherArticle.appointment
                 && this.facultyName.equals(otherArticle.facultyName) || (this.facultyName == null && otherArticle.facultyName == null)
                 && this.keywords.equals(otherArticle.keywords) || (this.keywords == null && otherArticle.keywords == null)
                 && this.date.equals(otherArticle.date) || (this.date == null && otherArticle.date == null)
                 && this.language == otherArticle.language
                 && this.priority == otherArticle.priority;
     }
-
 }
-
