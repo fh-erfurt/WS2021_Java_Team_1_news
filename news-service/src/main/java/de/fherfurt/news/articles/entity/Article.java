@@ -1,6 +1,5 @@
 package de.fherfurt.news.articles.entity;
 
-
 import de.fherfurt.news.core.entity.Entry;
 import lombok.Builder;
 
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Information of an article
+ * data container of an article
  *
  * @author Maximilian Röhr <maximilian.roehr@fh-erfurt.de>
  */
@@ -38,17 +37,17 @@ public class Article extends Entry {
     Priority priority;
 
     @Builder(setterPrefix = "with")
-    public Article( int id,
-                    String title,
-                    String content,
-                    Set<Integer> responsiblePersonIds,
-                    int authorId,
-                    int appointmentId,
-                    String facultyName,
-                    Set<String> keywords,
-                    LocalDateTime date,
-                    Language language,
-                    Priority priority){
+    public Article(int id,
+                   String title,
+                   String content,
+                   Set<Integer> responsiblePersonIds,
+                   int authorId,
+                   int appointmentId,
+                   String facultyName,
+                   Set<String> keywords,
+                   LocalDateTime date,
+                   Language language,
+                   Priority priority) {
         super(id);
         this.title = title;
         this.content = content;
@@ -68,19 +67,43 @@ public class Article extends Entry {
 
         Article otherArticle = (Article) object;
 
-
         //check all values if they are equal
         return this.getId() == otherArticle.getId()
-                && this.title.equals(otherArticle.title) || (this.title == null && otherArticle.title == null)
-                && this.content.equals(otherArticle.content) || (this.content == null && otherArticle.content == null)
-                && this.responsiblePersonIds.equals(otherArticle.responsiblePersonIds)
+                //check title
+                && checkObject(this.title, otherArticle.title)
+                //check content
+                && checkObject(this.content, otherArticle.content)
+                //check responsiblePersonsIds
+                && checkObject(this.responsiblePersonIds, otherArticle.responsiblePersonIds)
+                //check authorId
                 && this.authorId == otherArticle.authorId
+                //check appointmentId
                 && this.appointmentId == otherArticle.appointmentId
-                && this.facultyName.equals(otherArticle.facultyName) || (this.facultyName == null && otherArticle.facultyName == null)
-                && this.keywords.equals(otherArticle.keywords) || (this.keywords == null && otherArticle.keywords == null)
-                && this.date.equals(otherArticle.date) || (this.date == null && otherArticle.date == null)
-                && this.language == otherArticle.language
-                && this.priority == otherArticle.priority;
+                //check facultyName
+                && checkObject(this.facultyName, otherArticle.facultyName)
+                //check keyWords
+                && checkObject(this.keywords, otherArticle.keywords)
+                //check date
+                && checkObject(this.date, otherArticle.date)
+                // check language
+                && checkObject(this.language, otherArticle.language)
+                // check priority
+                && checkObject(this.priority, otherArticle.priority);
+    }
+
+    /**
+     * helper function to check if
+     * both objects are null
+     * both objects are not null -> check if both are equal
+     *
+     * @param obj1 object1
+     * @param obj2 object2
+     * @return return if both are equal
+     */
+    private boolean checkObject(Object obj1, Object obj2) {
+        return (obj1 == null && obj2 == null)
+                || (obj1 != null && obj2 != null)
+                && obj1.equals(obj2);
     }
 
 }
