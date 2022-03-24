@@ -24,8 +24,14 @@ import java.util.Set;
 public class ArticleToDtoMapper {
 
     TypeMap<Article, ArticleDto> typeMap = new ModelMapper().createTypeMap(Article.class, ArticleDto.class);
-    PersonClient personClient = new DevPersonClient();
-    AppointmentsClient appointmentsClient = new DevAppointmentsClient();
+
+    public ArticleToDtoMapper(PersonClient personClient, AppointmentsClient appointmentsClient) {
+        this.personClient = personClient;
+        this.appointmentsClient = appointmentsClient;
+    }
+
+    PersonClient personClient;
+    AppointmentsClient appointmentsClient;
 
     public ArticleDto map(Article article) {
 

@@ -1,10 +1,12 @@
 package de.fherfurt.news.articles.boundary.mapper;
 
+import de.fherfurt.appointments.client.DevAppointmentsClient;
 import de.fherfurt.appointments.client.transfer.objects.NewsAppointment;
 import de.fherfurt.news.articles.entity.Article;
 import de.fherfurt.news.articles.entity.Language;
 import de.fherfurt.news.articles.entity.Priority;
 import de.fherfurt.news.client.dto.ArticleDto;
+import de.fherfurt.persons.client.DevPersonClient;
 import de.fherfurt.persons.client.transfer.objects.PersonDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -39,7 +41,7 @@ class ArticleToDtoMapperTest {
 
     @Test
     void mapArticleToArticleDto() {
-        ArticleToDtoMapper mapper = new ArticleToDtoMapper();
+        ArticleToDtoMapper mapper = new ArticleToDtoMapper(new DevPersonClient(),new DevAppointmentsClient());
 
         ArticleDto expected = ArticleDto.builder()
                 .withId(5)

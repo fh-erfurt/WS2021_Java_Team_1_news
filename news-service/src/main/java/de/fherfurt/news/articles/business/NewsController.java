@@ -13,21 +13,39 @@ import de.fherfurt.news.core.persistance.dev.ArticleRepository;
 import de.fherfurt.news.core.persistance.errors.EntryNotFoundException;
 import de.fherfurt.persons.client.DevPersonClient;
 import de.fherfurt.persons.client.PersonClient;
+import lombok.Getter;
 
 import java.util.List;
 
-
 public class NewsController {
 
-    Repository<Article> repository = new ArticleRepository();
+    private NewsController() {
+        repository = new ArticleRepository();
+        appointmentsClient = new DevAppointmentsClient();
+        facultyClient = new DevFacultyClient();
+        personClient = new DevPersonClient();
+        articleValidator = new ArticleValidator(appointmentsClient,facultyClient,personClient);
+    }
 
-    AppointmentsClient appointmentsClient = new DevAppointmentsClient();
+    public static NewsController getInstance() {
+        if (instance == null){
+            instance = new NewsController();
+        }
+        return instance;
+    }
 
-    FacultyClient facultyClient = new DevFacultyClient();
+    private static NewsController instance;
 
-    PersonClient personClient = new DevPersonClient();
+    Repository<Article> repository;
 
-    ArticleValidator articleValidator = new ArticleValidator(appointmentsClient, facultyClient, personClient);
+    @Getter
+    AppointmentsClient appointmentsClient;
+    @Getter
+    FacultyClient facultyClient;
+    @Getter
+    PersonClient personClient;
+
+    ArticleValidator articleValidator;
 
     public void save(Article article) throws ArticleNotValidException {
         if (articleValidator.validateArticle(article)) {
@@ -35,7 +53,7 @@ public class NewsController {
                 if (repository.findBy(article.getId()) != null) {
                     article.setWasModified(true);
                 }
-            } catch (EntryNotFoundException ignored){/*do nothing*/}
+            } catch (EntryNotFoundException ignored) {/*do nothing*/}
             repository.save(article);
         } else {
             throw new ArticleNotValidException("Article not valid");

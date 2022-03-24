@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class NewsResource implements NewsResourceClient {
 
-    private final NewsController controller = new NewsController();
+    private final NewsController controller = NewsController.getInstance();
 
     /**
      * save an {@link ArticleDto} to the Repository
@@ -125,7 +125,7 @@ public class NewsResource implements NewsResourceClient {
      */
     @Override
     public ArticleDto getArticle(int id) throws EntryNotFoundException {
-        ArticleToDtoMapper mapper = new ArticleToDtoMapper();
+        ArticleToDtoMapper mapper = new ArticleToDtoMapper(controller.getPersonClient(),controller.getAppointmentsClient());
         Article article = controller.getArticle(id);
         return mapper.map(article);
     }
